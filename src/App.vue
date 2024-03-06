@@ -1,10 +1,20 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+
+  <NavbarCom />
+
   <router-view/>
 </template>
+
+
+<script>
+import NavbarCom from './components/NavbarCom'
+
+  export default{
+    components : {
+      NavbarCom
+    }
+  }
+</script>
 
 <style>
 #app {
@@ -28,3 +38,5 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 </style>
+
+
