@@ -1,9 +1,9 @@
 import { Users } from "./Users.js";
-import { Products } from "./Products.js";
+import { ServiceProviders } from "./ServiceProviders.js";
 //create objects
 let users=new Users()
-let products=new Products()
+let serviceProvider = new ServiceProviders()
 export{
     users,
-    products
+    serviceProvider 
 }
