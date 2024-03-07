@@ -13,19 +13,19 @@
             });
           }); 
     }
-  //   fetchProduct(req,res){
-  //       const qry =`
-  //       SELECT prodID,prodName,prodQuantity, productAmount,userID
-  //       FROM products WHERE prodID = ${req.params.id}
-  //       `
-  //       db.query(qry, (err, result) => {
-  //           if (err) throw err;
-  //           res.json({
-  //             status: res.statusCode,
-  //             result : result[0],
-  //           });
-  //         }); 
-  //   }
+    fetchProvider(req,res){
+        const qry =`
+        SELECT sp_id,company_name,first_name, last_name, birth_date , address, service, service_amount, phone_number, created_date, active_column, img_url_sp
+        FROM service_providers WHERE sp_id = ${req.params.id}
+        `
+        db.query(qry, (err, result) => {
+            if (err) throw err;
+            res.json({
+              status: res.statusCode,
+              result : result[0],
+            });
+          }); 
+    }
     addServiceProvider(req,res){
         const qry=` INSERT INTO service_providers SET ?;`
         let data = req.body
@@ -39,49 +39,34 @@
 
         })
     }
-  //   deleteProducts(req,res){
-  //     const qry=`DELETE FROM products ;`
 
-  //     db.query(qry, (err)=>{
-  //       if(err) throw err
-        
-  //       res.json({
-  //         status: res.statusCode,
-  //         msg:'Product was delete!'
-  //       })
+  deleteProvider(req,res){
+    const qry=`DELETE FROM service_providers WHERE sp_id=${req.params.id} ;`
+    // const user = req.body
+  
+    db.query(qry, (err)=>{
+  
+      if(err) throw err
+      res.json({
+        status: res.statusCode,
+        msg:'Service Provider is deleted!'
+      })
+  
+    })
+  }
 
-  //     })
-  // }
-  // deleteProduct(req,res){
-  //   const qry=`DELETE FROM products WHERE prodID=${req.params.id} ;`
-  //   // const user = req.body
+  async updateProvider(req,res){
+    const qry=` UPDATE service_providers SET ? WHERE sp_id=${req.params.id};`
   
-  //   db.query(qry, (err)=>{
+    db.query(qry, [req.body], (err)=>{
+      if(err) throw err
+      res.json({
+        status: res.statusCode,
+        msg:'Service Provider is updated!'
+      })
   
-  //     if(err) throw err
-  //     res.json({
-  //       status: res.statusCode,
-  //       msg:'Product is deleted!'
-  //     })
-  
-  //   })
-  // }
-  // async updateProduct(req,res){
-  //   const qry=`
-  //   UPDATE products 
-  //   SET ?
-  //   WHERE prodID = ${req.params.id};`
-  
-  //   db.query(qry, [req.body], (err)=>{
-  //     if(err) throw err
-      
-  //     res.json({
-  //       status: res.statusCode,
-  //       msg:'Product is updated!'
-  //     })
-  
-  //   })
-  // }
+    })
+  }
 
  
  }

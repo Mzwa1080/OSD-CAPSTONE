@@ -40,7 +40,7 @@ res.status(200).sendFile(path.join(__dirname,'./static/index.html'))
 // app.user('/requests', requestsRouter)
 
 // Products 
-app.use('/service_providers',spRouter)
+app.use('/service-providers',spRouter)
 
 
 app.use(errorHandling)

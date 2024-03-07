@@ -17,18 +17,18 @@ spRouter.get('/',(req,res)=>{
     }
 
 })
-// spRouter.get('/:id',(req,res)=>{
-//     try{
-//         ServiceProviders.fetchProduct(req,res)
-//     }catch(e){
-//         res.json({
-//             status:res.statusCode,
-//             msg:'failed to retrieve a product'
-//         })
-//     }
+spRouter.get('/:id',(req,res)=>{
+    try{
+        serviceProvider.fetchProvider(req,res)
+    }catch(e){
+        res.json({
+            status:res.statusCode,
+            msg:'failed to retrieve a service provider'
+        })
+    }
 
-// })
-spRouter.post('/addServiceProvider',bodyParser.json(),(req,res)=>{
+})
+spRouter.post('/add-service-provider',bodyParser.json(),(req,res)=>{
     try{
         serviceProvider.addServiceProvider(req,res)
     }catch(e){
@@ -38,73 +38,33 @@ spRouter.post('/addServiceProvider',bodyParser.json(),(req,res)=>{
         })
     }
 })
-// spRouter.delete('/deleteProducts',(req,res)=>{
-//     try{
-//         ServiceProviders.deleteProducts(req,res)
 
-//     }catch(e){
 
-//         res.json({
-//             status:res.statusCode,
-//             msg:'failed to delete a product',
-//             // results:products.fetchProducts(req,res)
-//         })
-//     }
-// })
+spRouter.delete('/delete/:id',(req,res)=>{
+    try{
+        serviceProvider.deleteProvider(req,res)
+    }catch(e){
+        res.json({
+            status:res.statusCode,
+            msg:'Failed to delete a Service Provider',
+        })
+    }
+})
 
-// spRouter.delete('/delete/:id',(req,res)=>{
-//     try{
-//         ServiceProviders.deleteProduct(req,res)
+spRouter.patch('/update/:id',(req,res)=>{
+    try{
+        serviceProvider.updateProvider(req,res)
 
-//     }catch(e){
+    }catch(e){
 
-//         res.json({
-//             status:res.statusCode,
-//             msg:'failed to delete a user',
-//         })
-//     }
-// })
+        res.json({
+            status:res.statusCode,
+            msg:'Failed to update Service Provider',
+        })
+    }
+})
 
-// spRouter.patch('/update/:id',(req,res)=>{
-//     try{
-//         ServiceProviders.updateProduct(req,res)
 
-//     }catch(e){
-
-//         res.json({
-//             status:res.statusCode,
-//             msg:'failed to update a user',
-//         })
-//     }
-// })
-
-// spRouter.delete('/delete/:id',(req,res)=>{
-//     try{
-//         ServiceProviders.deleteProduct(req,res)
-
-//     }catch(e){
-
-//         res.json({
-//             status:res.statusCode,
-//             msg:'failed to delete a product',
-//             // results:products.fetchProducts(req,res)
-//         })
-//     }
-// })
-
-// spRouter.patch('/update/:id',(req,res)=>{
-//     try{
-//         ServiceProviders.updateProduct(req,res)
-
-//     }catch(e){
-
-//         res.json({
-//             status:res.statusCode,
-//             msg:'failed to update a product',
-//             // results:products.fetchProducts(req,res)
-//         })
-//     }
-// })
 
 export{
     spRouter
