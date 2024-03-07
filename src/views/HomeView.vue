@@ -1,6 +1,9 @@
 <template>
 
+<NavbarHome />
 
+  
+  <div class="container">
 <!-- Section: Design Block -->
 <section class="text-center">
   <!-- Background image -->
@@ -88,16 +91,17 @@
   </div>
 </section>
 <!-- Section: Design Block -->
-
+</div>
 
 </template>
 
 <script>
-// @ is an alias to /src
+import NavbarHome from '../components/NavbarHome.vue'
 
 export default {
   name: 'HomeView',
   components: {
+    NavbarHome
   }
 }
 </script>

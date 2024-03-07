@@ -1,17 +1,14 @@
 <template>
 
-  <NavbarCom />
-
   <router-view/>
 </template>
 
 
 <script>
-import NavbarCom from './components/NavbarCom'
 
   export default{
     components : {
-      NavbarCom
+    
     }
   }
 </script>
