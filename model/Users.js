@@ -18,7 +18,7 @@ class Users {
   fetchUser(req, res) {
     const qry = `
     SELECT user_id,first_name,last_name, email, address , img_url_users
-    FROM users WHERE sp_id = ${req.params.id} `;
+    FROM users WHERE user_id=${req.params.id} `;
 
     db.query(qry, (err, result) => {
       if (err) throw err;
@@ -28,13 +28,14 @@ class Users {
       });
     });
   }
+
   async registerUser(req, res) {
     //payload
     let data = req.body;
-    data.userPwd = await hash(data?.userPwd, 10);
+    data.password = await hash(data?.password, 10);
     let user = {
-      emailAdd: data.emailAdd,
-      userPwd: data.userPwd,
+      email: data.email,
+      password: data.password,
     };
     const qry = `
     INSERT INTO users
@@ -74,29 +75,30 @@ class Users {
 
   async updateUser(req, res) {
     let data = req.body;
-    if (data?.userPwd) {
-      data.userPwd = await hash(data?.userPwd, 8);
+    if (data?.password) {
+      data.password = await hash(data?.password, 8);
     }
     const qry = `
   UPDATE users 
   SET ?
-  WHERE userID = ${req.params.id};`;
+  WHERE user_id=${req.params.id};`;
 
     db.query(qry, [data], (err) => {
       if (err) throw err;
 
       res.json({
         status: res.statusCode,
-        msg: "User updated!",
+        msg: `${data.first_name} is updated!`,
       });
     });
   }
 
   login(req, res) {
-    const { emailAdd, userPwd } = req.body;
-    const qry = `SELECT userID, firstName, lastName, userAge, emailAdd , userPwd, userRole
-  FROM users
-  WHERE emailAdd='${emailAdd}'`;
+    const { email, password } = req.body;
+    console.log(email);
+    const qry = 
+    `SELECT user_id,first_name,last_name, email, address , img_url_users, password
+    FROM users WHERE email='${email}'`;
 
     db.query(qry, async (err, result) => {
       if (err) throw err;
@@ -106,16 +108,17 @@ class Users {
           msg: "You provided a wrong email address",
         });
       } else {
-        const validPass = await compare(userPwd, result[0].userPwd);
+        const validPass = await compare(password, result[0].password);
         if (validPass) {
           const token = createToken({
-            emailAdd,
-            userPwd,
+            email,
+            password
           });
           res.json({
             status: res.statusCode,
             msg: "You logged in",
-            result,
+            token,
+            result : result[0]
           });
         } else {
           res.json({
