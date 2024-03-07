@@ -28,6 +28,18 @@ spRouter.get('/:id',(req,res)=>{
     }
 
 })
+
+spRouter.post('/register-service-provider',bodyParser.json(),(req,res)=>{
+    try{
+        serviceProvider.registerServiceProvider(req,res)
+    }catch(e){
+        res.json({
+            status:res.statusCode,
+            msg:'failed to add service provider'
+        })
+    }
+})
+
 spRouter.post('/add-service-provider',bodyParser.json(),(req,res)=>{
     try{
         serviceProvider.addServiceProvider(req,res)
@@ -57,6 +69,17 @@ spRouter.patch('/update/:id',(req,res)=>{
 
     }catch(e){
 
+        res.json({
+            status:res.statusCode,
+            msg:'Failed to update Service Provider',
+        })
+    }
+})
+
+spRouter.post('/login',(req,res)=>{
+    try{
+        serviceProvider.login(req,res)
+    }catch(e){
         res.json({
             status:res.statusCode,
             msg:'Failed to update Service Provider',

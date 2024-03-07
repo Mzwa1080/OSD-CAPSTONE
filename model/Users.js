@@ -4,9 +4,9 @@ import { createToken } from "../middleware/AuthenticateUser.js";
 class Users {
   fetchUsers(req, res) {
     const qry = `
-        SELECT userID,firstName,lastName,userAge,emailAdd,userPwd,userRole
-        FROM users
-        `;
+    SELECT user_id,first_name,last_name, email, address , img_url_users
+    FROM users;  `;
+
     db.query(qry, (err, results) => {
       if (err) throw err;
       res.json({
@@ -17,10 +17,9 @@ class Users {
   }
   fetchUser(req, res) {
     const qry = `
-    SELECT userID,firstName,lastName,userAge,emailAdd,userPwd,userRole
-    FROM users
-        WHERE userID = ${req.params.id}
-        `;
+    SELECT user_id,first_name,last_name, email, address , img_url_users
+    FROM users WHERE sp_id = ${req.params.id} `;
+
     db.query(qry, (err, result) => {
       if (err) throw err;
       res.json({
@@ -29,7 +28,7 @@ class Users {
       });
     });
   }
-  async createUser(req, res) {
+  async registerUser(req, res) {
     //payload
     let data = req.body;
     data.userPwd = await hash(data?.userPwd, 10);
@@ -59,21 +58,9 @@ class Users {
     });
   }
 
-  deleteUsers(req, res) {
-    const qry = `DELETE FROM users ;`;
-
-    db.query(qry, (err) => {
-      if (err) throw err;
-
-      res.json({
-        status: res.statusCode,
-        msg: "Users are deleted!",
-      });
-    });
-  }
 
   deleteUser(req, res) {
-    const qry = `DELETE FROM users WHERE userID=${req.params.id} ;`;
+    const qry = `DELETE FROM users WHERE user_id=${req.params.id} ;`;
     // const user = req.body
 
     db.query(qry, (err) => {
