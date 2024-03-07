@@ -1,5 +1,6 @@
  import {connection as db} from "../config/index.js"
  class ServiceProviders{
+
     fetchSP(req,res){
         const qry =`
         SELECT sp_id,company_name,first_name, last_name, birth_date , address, service, service_amount, phone_number, created_date, active_column, img_url_sp
@@ -25,19 +26,19 @@
   //           });
   //         }); 
   //   }
-  //   addProduct(req,res){
-  //       const qry=` INSERT INTO products SET ?;`
-  //       let data = req.body
-  //       db.query(qry,[data], (err)=>{
-  //         if(err) throw err
-  //         res.json({
-  //           status: res.statusCode,
-  //           msg:'new product was added'
-  //         })
+    addServiceProvider(req,res){
+        const qry=` INSERT INTO service_providers SET ?;`
+        let data = req.body
+        db.query(qry,[data], (err)=>{
+          if(err) throw err
+          res.json({
+            status: res.statusCode,
+            msg:'new product was added'
+          })
 
 
-  //       })
-  //   }
+        })
+    }
   //   deleteProducts(req,res){
   //     const qry=`DELETE FROM products ;`
 

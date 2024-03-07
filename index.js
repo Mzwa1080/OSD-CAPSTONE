@@ -35,7 +35,7 @@ app.get('^/$|/osd',(req,res)=>{
 res.status(200).sendFile(path.join(__dirname,'./static/index.html'))
 })
 // users
-app.use('/users',userRouter)
+// app.use( '/users',userRouter)
 
 // app.user('/requests', requestsRouter)
 

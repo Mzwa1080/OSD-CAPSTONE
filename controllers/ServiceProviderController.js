@@ -1,13 +1,14 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import { ServiceProviders } from '../model/ServiceProviders.js'
+import { serviceProvider } from '../model/index.js'
 
 const spRouter=express.Router()
 
 //fetch all products
 spRouter.get('/',(req,res)=>{
     try{
-        ServiceProviders.fetchSP(req,res)
+        
+        serviceProvider.fetchSP(req,res)
     }catch(e){
         res.json({
             status:res.statusCode,
@@ -27,16 +28,16 @@ spRouter.get('/',(req,res)=>{
 //     }
 
 // })
-// spRouter.post('/addProduct',bodyParser.json(),(req,res)=>{
-//     try{
-//         ServiceProviders.addProduct(req,res)
-//     }catch(e){
-//         res.json({
-//             status:res.statusCode,
-//             msg:'failed to add product'
-//         })
-//     }
-// })
+spRouter.post('/addServiceProvider',bodyParser.json(),(req,res)=>{
+    try{
+        serviceProvider.addServiceProvider(req,res)
+    }catch(e){
+        res.json({
+            status:res.statusCode,
+            msg:'failed to add service provider'
+        })
+    }
+})
 // spRouter.delete('/deleteProducts',(req,res)=>{
 //     try{
 //         ServiceProviders.deleteProducts(req,res)
