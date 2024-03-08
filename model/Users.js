@@ -2,6 +2,7 @@ import { connection as db } from "../config/index.js";
 import { hash, compare } from "bcrypt";
 import { createToken } from "../middleware/AuthenticateUser.js";
 class Users {
+
   fetchUsers(req, res) {
     const qry = `
     SELECT user_id,first_name,last_name, email, address , img_url_users
@@ -15,6 +16,7 @@ class Users {
       });
     });
   }
+
   fetchUser(req, res) {
     const qry = `
     SELECT user_id,first_name,last_name, email, address , img_url_users
@@ -58,7 +60,6 @@ class Users {
       }
     });
   }
-
 
   deleteUser(req, res) {
     const qry = `DELETE FROM users WHERE user_id=${req.params.id} ;`;

@@ -5,7 +5,7 @@ import { verifyToken } from "../middleware/AuthenticateUser.js";
 
 const userRouter=express.Router()
 //fetch users
-userRouter.get('/',(req,res)=>{
+userRouter.get('/', verifyToken ,(req,res)=>{
     try{
         users.fetchUsers(req,res)
     }catch(e){
@@ -16,7 +16,7 @@ userRouter.get('/',(req,res)=>{
     }
 })
 //fetch user
-userRouter.get('/:id',(req,res)=>{
+userRouter.get('/:id', verifyToken , (req,res)=>{
     try{
         users.fetchUser(req,res)
     }catch(e){
@@ -48,7 +48,6 @@ userRouter.post('/register',bodyParser.json(),(req,res)=>{
     }
 })
 
-
 userRouter.delete('/delete/:id',(req,res)=>{
     try{
         users.deleteUser(req,res)
@@ -65,6 +64,7 @@ userRouter.delete('/delete/:id',(req,res)=>{
 userRouter.post('/login', (req,res)=>{
     try{
         users.login(req,res)
+    
     }catch(e){
         res.json({
             status : req.statusCode,
