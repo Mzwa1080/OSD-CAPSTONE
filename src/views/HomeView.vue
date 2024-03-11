@@ -61,9 +61,12 @@
             </div>
 
             <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-block mb-4">
-              Sign up
-            </button>
+            <RouterLink to="/dashboard">
+
+              <button type="submit" class="btn btn-primary btn-block mb-4">
+                Sign up
+              </button>
+            </RouterLink>
 
             <!-- Register buttons -->
             <div class="text-center">
