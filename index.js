@@ -1,6 +1,7 @@
+// ------- Controller -------
 import { express, userRouter } from "./controllers/UserController.js";
 import { spRouter } from "./controllers/ServiceProviderController.js";
-// import {requestsRouter} from './controllers/OrderController.js'
+import {orderRouter} from './controllers/OrderController.js'
 import cookieParser from "cookie-parser";
 import { errorHandling } from "./middleware/ErrorHandling.js";
 import path from 'path'
@@ -37,7 +38,7 @@ res.status(200).sendFile(path.join(__dirname,'./static/index.html'))
 // users
 app.use( '/users',userRouter)
 
-// app.user('/requests', requestsRouter)
+app.use('/requests', orderRouter)
 
 // Products 
 app.use('/service-providers',spRouter)

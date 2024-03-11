@@ -1,12 +1,41 @@
 import { connection as db } from "../config/index.js";
 import { hash, compare } from "bcrypt";
 import { createToken } from "../middleware/AuthenticateUser.js";
-class Users {
-  fetchUsers(req, res) {
+
+class Orders {
+
+
+  async addingOrders(req, res) {
+    //payload
+    let data = req.body;
     const qry = `
-        SELECT userID,firstName,lastName,userAge,emailAdd,userPwd,userRole
-        FROM 
-        `;
+    INSERT INTO requested_services
+    SET ?;`;
+
+    db.query(qry, [data], (err) => {
+
+      console.log(data);
+      if (err) throw err;
+      //  else {
+          res.json({
+          status: res.statusCode,
+          msg: "You're registered",
+        });
+      // }
+    });
+  }
+
+  fetchOrders(req, res) {
+    const qry = `
+    SELECT requested_services.rs_id, requested_services.user_id, requested_services.sp_id, requested_services.service_requested, requested_services.request_date,
+    users.first_name AS user_first_name, users.address AS user_add,
+    service_providers.company_name AS sp_comp_name, service_providers.first_name AS sp_name,  service_providers.address AS sp_address, 
+    service_providers.service AS sp_service, service_providers.service_amount AS sp_amount, service_providers.phone_number AS sp_phonenumber
+FROM requested_services 
+INNER JOIN users ON requested_services.user_id = users.user_id
+INNER JOIN service_providers  ON requested_services.sp_id = service_providers.sp_id;
+    `;
+  
     db.query(qry, (err, results) => {
       if (err) throw err;
       res.json({
@@ -15,130 +44,44 @@ class Users {
       });
     });
   }
-  fetchUser(req, res) {
-    const qry = `
-    SELECT userID,firstName,lastName,userAge,emailAdd,userPwd,userRole
-    FROM users
-        WHERE userID = ${req.params.id}
-        `;
-    db.query(qry, (err, result) => {
-      if (err) throw err;
-      res.json({
-        status: res.statusCode,
-        result,
-      });
-    });
-  }
-  async createUser(req, res) {
-    //payload
-    let data = req.body;
-    data.userPwd = await hash(data?.userPwd, 10);
-    let user = {
-      emailAdd: data.emailAdd,
-      userPwd: data.userPwd,
-    };
-    const qry = `
-    INSERT INTO users
-    SET ?;
-    `;
-    db.query(qry, [data], (err) => {
-      if (err) {
-        res.json({
-          status: res.statusCode,
-          msg: "already exists.please use another email address",
-        });
-      } else {
-        //create token
-        let token = createToken(user);
-        res.json({
-          status: res.statusCode,
-          token,
-          msg: "You're registered",
-        });
-      }
-    });
-  }
 
-  deleteUsers(req, res) {
-    const qry = `DELETE FROM users ;`;
 
-    db.query(qry, (err) => {
-      if (err) throw err;
+  // query that allow user to book/select a service provider and get the users_firstName, address, phone_number and the service provider data/selected columns of a selected service provider ... Add/joing them in one row of a new table called requested_services 
+ 
 
-      res.json({
-        status: res.statusCode,
-        msg: "Users are deleted!",
-      });
-    });
-  }
+  // deleteUser(req, res) {
+  //   const qry = `DELETE FROM users WHERE userID=${req.params.id} ;`;
+  //   // const user = req.body
 
-  deleteUser(req, res) {
-    const qry = `DELETE FROM users WHERE userID=${req.params.id} ;`;
-    // const user = req.body
+  //   db.query(qry, (err) => {
+  //     if (err) throw err;
+  //     res.json({
+  //       status: res.statusCode,
+  //       msg: "Users are deleted!",
+  //     });
+  //   });
+  // }
 
-    db.query(qry, (err) => {
-      if (err) throw err;
-      res.json({
-        status: res.statusCode,
-        msg: "Users are deleted!",
-      });
-    });
-  }
+  // async updateUser(req, res) {
+  //   let data = req.body;
+  //   if (data?.userPwd) {
+  //     data.userPwd = await hash(data?.userPwd, 8);
+  //   }
+  //   const qry = `
+  // UPDATE users 
+  // SET ?
+  // WHERE userID = ${req.params.id};`;
 
-  async updateUser(req, res) {
-    let data = req.body;
-    if (data?.userPwd) {
-      data.userPwd = await hash(data?.userPwd, 8);
-    }
-    const qry = `
-  UPDATE users 
-  SET ?
-  WHERE userID = ${req.params.id};`;
+  //   db.query(qry, [data], (err) => {
+  //     if (err) throw err;
 
-    db.query(qry, [data], (err) => {
-      if (err) throw err;
+  //     res.json({
+  //       status: res.statusCode,
+  //       msg: "User updated!",
+  //     });
+  //   });
+  // }
 
-      res.json({
-        status: res.statusCode,
-        msg: "User updated!",
-      });
-    });
-  }
 
-  login(req, res) {
-    const { emailAdd, userPwd } = req.body;
-    const qry = `SELECT userID, firstName, lastName, userAge, emailAdd , userPwd, userRole
-  FROM users
-  WHERE emailAdd='${emailAdd}'`;
-
-    db.query(qry, async (err, result) => {
-      if (err) throw err;
-      if (!result?.length) {
-        res.json({
-          status: res.statusCode,
-          msg: "You provided a wrong email address",
-        });
-      } else {
-        const validPass = await compare(userPwd, result[0].userPwd);
-        if (validPass) {
-          const token = createToken({
-            emailAdd,
-            userPwd,
-          });
-          res.json({
-            status: res.statusCode,
-            msg: "You logged in",
-            result,
-          });
-        } else {
-          res.json({
-            status: res.statusCode,
-            msg: "Please provide correct password",
-            result,
-          });
-        }
-      }
-    });
-  }
 }
-export { Users };
+export { Orders };
