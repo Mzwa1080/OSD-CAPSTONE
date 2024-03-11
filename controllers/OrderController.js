@@ -27,6 +27,17 @@ orderRouter.post('/add', bodyParser.json(),(req,res)=>{
     }
 })
 
+orderRouter.get('/:id/requested-services',(req,res)=>{
+    try{
+        orders.fetchOrders(req,res)
+    }catch(e){
+        res.json({
+            status:res.statusCode,
+            msg:'failed to retrieve a user'
+        })
+    }
+})
+
 //fetch user
 
 // orderRouter.patch('/update/:id', bodyParser.json(),(req,res)=>{

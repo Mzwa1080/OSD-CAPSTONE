@@ -44,6 +44,7 @@ INNER JOIN service_providers  ON requested_services.sp_id = service_providers.sp
       });
     });
   }
+  
 
 
   // query that allow user to book/select a service provider and get the users_firstName, address, phone_number and the service provider data/selected columns of a selected service provider ... Add/joing them in one row of a new table called requested_services 

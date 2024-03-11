@@ -5,7 +5,7 @@ import { verifyToken } from "../middleware/AuthenticateUser.js";
 
 const userRouter=express.Router()
 //fetch users
-userRouter.get('/', verifyToken ,(req,res)=>{
+userRouter.get('/' ,(req,res)=>{
     try{
         users.fetchUsers(req,res)
     }catch(e){
@@ -16,7 +16,7 @@ userRouter.get('/', verifyToken ,(req,res)=>{
     }
 })
 //fetch user
-userRouter.get('/:id', verifyToken , (req,res)=>{
+userRouter.get('/:id' , (req,res)=>{
     try{
         users.fetchUser(req,res)
     }catch(e){
@@ -37,7 +37,7 @@ userRouter.patch('/update/:id', bodyParser.json(),(req,res)=>{
     }
 })
 //add a user
-userRouter.post('/register',bodyParser.json(),(req,res)=>{
+userRouter.post('/register', verifyToken,bodyParser.json(),(req,res)=>{
     try{
         users.registerUser(req,res)
     }catch(e){
