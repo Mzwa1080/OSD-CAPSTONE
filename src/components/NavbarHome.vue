@@ -1,7 +1,7 @@
 <template>
 
 <nav class="navbar d-flex navbar-expand-lg bg-light">
-  <div class="container-fluid  ">
+  <div class="container-fluid ms-4 me-4 ">
     <RouterLink to="/"  class=" m-4 justify-content-center navbar-brand" >OSD</RouterLink>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

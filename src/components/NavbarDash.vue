@@ -1,36 +1,55 @@
 <template>
 
-<nav class="navbar d-flex background-img navbar-expand-lg ">
-  <div class="container-fluid justify-content-center">
+<nav class="navbar d-flex background-img  navbar-expand-lg ">
+  <div class="container-fluid ms-4 me-4 justify-content-center">
       <a class="navbar-brand  HZ" href="/">OSD</a>
 
     <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon "></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+    <div class="collapse justify-content-end navbar-collapse " id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <RouterLink to="/" class="nav-link " aria-current="page" >Home</RouterLink>
+          <RouterLink to="/" class="nav-link mt-2" aria-current="page" >Your Services</RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink to="/about" class="nav-link " >About</RouterLink>
+          <RouterLink to="/about" class="nav-link mt-2" > Contacts Us</RouterLink>
         </li>
+
+        <a
+  
+          class="dropdown-toggle d-flex align-items-center hidden-arrow"
+          href="#"
+          id="navbarDropdownMenuAvatar"
+          role="button"
+          aria-expanded="false"
+        >
+          <img
+            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+            class="rounded-circle"
+            height="25"
+            alt="Black and White Portrait of a Man"
+            loading="lazy"
+          />
+        </a>
+
+
         <li class="nav-item">
-          <RouterLink to="/products" class="nav-link " >Products</RouterLink>
+          <RouterLink to="/about" class="nav-link " > 
+            <button class="btn btn-success"> Logout</button>
+          </RouterLink>
         </li>
-        <li class="nav-item">
-          <RouterLink to="/admin" class="nav-link " >Admin</RouterLink>
-        </li>
-        <li class="nav-item">
-          <RouterLink to="/contact" class="nav-link " >Contact</RouterLink>
-        </li>
+
       </ul>
+
 
     </div>
 
 
   </div>
 </nav>
+
+
 
 
 </template>
