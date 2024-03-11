@@ -1,13 +1,19 @@
 <template>
+    <NavbarDash />
     <div>
-        <h1> Selected User Profile</h1>
+        
+
+
 
     </div>
 </template>
 
 <script>
+import NavbarDash from '@/components/NavbarDash.vue';
     export default {
-        
+        components : {
+            NavbarDash
+        }
     }
 </script>
 
