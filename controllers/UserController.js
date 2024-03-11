@@ -37,7 +37,7 @@ userRouter.patch('/update/:id', bodyParser.json(),(req,res)=>{
     }
 })
 //add a user
-userRouter.post('/register', verifyToken,bodyParser.json(),(req,res)=>{
+userRouter.post('/register',bodyParser.json(),(req,res)=>{
     try{
         users.registerUser(req,res)
     }catch(e){
