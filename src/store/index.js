@@ -132,15 +132,16 @@ export default createStore({
         });
       }
     },
-    // Vuex store action
+
 async getUserRequests(context, payload) {
   try {
-    const {result} = (await axios.get(`${osdURL}user/${payload}/requested-services`)).data;
+    console.log(payload);
+    const {results} = (await axios.get(`${osdURL}user/${payload}/requested-services`)).data;
     // const data = result.data; // Get the response data directly
-    console.log('--->', result.data); // Log the data for debugging
+    console.log('--->', results); // Log the data for debugging
 
-    if (result) {
-      context.commit('setUser', result.data); // Assuming setUser mutation updates the user state
+    if (results) {
+      context.commit('setUser', results); // Assuming setUser mutation updates the user state
     } else {
       sweet({
         title: 'Retrieving user requests',
