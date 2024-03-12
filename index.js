@@ -38,7 +38,7 @@ res.status(200).sendFile(path.join(__dirname,'./static/index.html'))
 // users
 app.use('/users',userRouter)
 
-app.use('/requests', orderRouter)
+app.use('/user', orderRouter)
 
 // Products 
 app.use('/service-providers',spRouter)
