@@ -22,7 +22,7 @@
         <div class="about m-5">
             <h2>About</h2>
             <hr v-if="serviceProvider">
-            <p>{{ serviceProvider.about_company}}</p>
+            <!-- <p>{{ serviceProvider.about_company}}</p> -->
         </div>
       </div>
 
@@ -39,9 +39,9 @@
       NavbarDash
     },
     computed: {
-            serviceProvider(){
-                return this.$store.state.service_provider;
-            }
+          serviceProvider(){
+              return this.$store.state.service_provider;
+           }
     },
     mounted() {
       this.$store.dispatch('getServiceProvider', { id: this.$route.params.id });

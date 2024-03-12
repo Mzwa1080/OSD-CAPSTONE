@@ -10,7 +10,7 @@
     <div class="collapse justify-content-end navbar-collapse " id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <RouterLink to="/" class="nav-link mt-2" aria-current="page" >Requested Services</RouterLink>
+          <RouterLink to="/user/:id/requested-service(s)" class="nav-link mt-2" aria-current="page" >Requested Services</RouterLink>
         </li>
         <li class="nav-item">
           <RouterLink to="/about" class="nav-link mt-2" > Contacts Us</RouterLink>

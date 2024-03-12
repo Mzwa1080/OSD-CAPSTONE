@@ -11,7 +11,9 @@ export default createStore({
   state: {
     service_providers : null,
     service_provider : null,
-    user : null
+    user : null,
+    requested_services : null
+    // order_requests : null
   },
   getters: {
   },
@@ -24,6 +26,9 @@ export default createStore({
     },
     setUser(state,value){
       state.user = value
+    } ,
+    setRequestedServices(state,value){
+      state.requested_services = value
     }
   
   },
@@ -46,7 +51,7 @@ export default createStore({
     async getServiceProvider(context, payload) {
       try {
         const result = (await axios.get(`${osdURL}service-providers/${payload.id}`)).data;
-        console.log(result.result);
+        // console.log(result.result);
         if (result) {
           context.commit('setServiceProvider', result.result);
         } else {
@@ -70,7 +75,7 @@ export default createStore({
     async registerUser(context, payload) {
       try {
         let result = await axios.post(`${osdURL}users/register`, payload);
-        console.log('result ->' + result.data);
+        // console.log('result ->' + result.data);
         if (result) {
           context.commit('setUser', payload);
           sweet({
@@ -127,6 +132,33 @@ export default createStore({
         });
       }
     },
+async getUserRequests(context, payload) {
+  try {
+    const {result} = (await axios.get(`${osdURL}user/${payload}/requested-services`)).data;
+    // const data = result.data; // Get the response data directly
+    console.log('--->', result.data); // Log the data for debugging
+
+    if (result) {
+      context.commit('setUser', result.data); // Assuming setUser mutation updates the user state
+    } else {
+      sweet({
+        title: 'Retrieving user requests',
+        text: 'User requests were not found',
+        icon: 'info',
+        timer: 2000
+      });
+    }
+  } catch (e) {
+    console.error('Error retrieving user requests:', e);
+    sweet({
+      title: 'Error',
+      text: 'An error occurred while retrieving user requests.',
+      icon: 'error',
+      timer: 2000
+    });
+  }
+},
+
 
   },
   modules: {
