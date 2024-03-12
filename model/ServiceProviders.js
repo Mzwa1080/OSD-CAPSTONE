@@ -5,7 +5,7 @@ import { createToken } from "../middleware/AuthenticateUser.js";
 class ServiceProviders {
   fetchSP(req, res) {
     const qry = `
-        SELECT sp_id,company_name,first_name, last_name, birth_date , address, service, service_amount, phone_number, created_date, active_column, img_url_sp, email, password
+        SELECT sp_id,company_name,first_name, about_company,email, last_name, birth_date , address, service, service_amount, phone_number, created_date, active_column, img_url_sp, email, password
         FROM service_providers;  `;
     db.query(qry, (err, results) => {
       if (err) throw err;
@@ -17,7 +17,7 @@ class ServiceProviders {
   }
   fetchProvider(req, res) {
     const qry = `
-        SELECT sp_id,company_name,first_name, last_name, birth_date , address, service, service_amount, phone_number, created_date, active_column, img_url_sp
+        SELECT sp_id,company_name,first_name, email, last_name, about_company, birth_date , address, service, service_amount, phone_number, created_date, active_column, img_url_sp
         FROM service_providers WHERE sp_id = ${req.params.id}
         `;
     db.query(qry, (err, result) => {
@@ -46,7 +46,7 @@ class ServiceProviders {
       if (err) {
         res.json({
           status: res.statusCode,
-          msg: "already exists.please use another email address",
+          msg: "Already exists.please use another email address",
         });
       } else {
         //create token
