@@ -22,7 +22,7 @@
           <p class="card-text">
             {{ sp.service }}
           </p>
-          <RouterLink :to="{name:'spview', params:{id:sp.sp_id} }">
+          <RouterLink :to="{name:'spview', params:{id: sp.sp_id} }">
 
             <button class="btn btn-secondary">
                Request A Service
