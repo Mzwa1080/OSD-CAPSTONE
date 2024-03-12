@@ -11,8 +11,8 @@ export default createStore({
   state: {
     service_providers : null,
     service_provider : null,
-    user : null,
-    requested_services : null
+    user : null
+    // requested_services : null
     // order_requests : null
   },
   getters: {
@@ -27,9 +27,9 @@ export default createStore({
     setUser(state,value){
       state.user = value
     } ,
-    setRequestedServices(state,value){
-      state.requested_services = value
-    }
+    // setRequestedServices(state,value){
+    //   state.requested_services = value
+    // }
   
   },
   actions: {
@@ -132,6 +132,7 @@ export default createStore({
         });
       }
     },
+    // Vuex store action
 async getUserRequests(context, payload) {
   try {
     const {result} = (await axios.get(`${osdURL}user/${payload}/requested-services`)).data;
