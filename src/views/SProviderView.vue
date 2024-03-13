@@ -22,7 +22,7 @@
         <div class="about m-5">
             <h2>About</h2>
             <hr v-if="serviceProvider">
-            <!-- <p>{{ serviceProvider.about_company}}</p> -->
+            <p>{{ serviceProvider }}</p>
         </div>
       </div>
 
@@ -40,7 +40,8 @@
     },
     computed: {
           serviceProvider(){
-              return this.$store.state.service_provider;
+            // console.log(this.$store.state.service_provider.about_company);
+              return this.$store.state.service_provider.about_company;
            }
     },
     mounted() {
