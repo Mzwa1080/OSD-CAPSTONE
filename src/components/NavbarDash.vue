@@ -2,7 +2,7 @@
 
 <nav class="navbar d-flex background-img  navbar-expand-lg ">
   <div class="container-fluid ms-4 me-4 justify-content-center">
-      <a class="navbar-brand  HZ" href="/">OSD</a>
+      <a class="navbar-brand  " href="/">OSD</a>
 
     <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon "></span>
@@ -35,7 +35,7 @@
 
 
         <li class="nav-item">
-          <RouterLink to="/about" class="nav-link " > 
+          <RouterLink to="/login" class="nav-link " > 
             <button class="btn btn-success"> Logout</button>
           </RouterLink>
         </li>

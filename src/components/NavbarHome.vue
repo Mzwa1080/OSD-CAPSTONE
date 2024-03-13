@@ -9,7 +9,7 @@
     <div class="collapse justify-content-end navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <RouterLink to="/" class="nav-link " aria-current="page" >
+          <RouterLink to="/login" class="nav-link " aria-current="page" >
             <button class="btn btn-success m-4">Login</button>
           </RouterLink>
         </li>

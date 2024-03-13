@@ -1,17 +1,18 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 import sweet from 'sweetalert'
-// import { useCookies } from 'vue3-cookies'
-// const {cookies} = useCookies()
+import { useCookies } from 'vue3-cookies'
+const {cookies} = useCookies()
 // import router from '@/router'
-// import AuthenticateUser from '@/service/AuthenticateUser'
+import AuthenticateUser from '../service/AuthenticatedUser'
 const osdURL = 'https://osd-capstone-1.onrender.com/'
 
 export default createStore({
   state: {
     service_providers : null,
     service_provider : null,
-    user : null
+    user : null,
+    users : null
     // requested_services : null
     // order_requests : null
   },
@@ -25,8 +26,11 @@ export default createStore({
       state.service_providers = value
     },
     setUser(state,value){
-      state.user = value
+      state.user = value;
     } ,
+    setUsers(state,value){
+      state.users = value;
+    }
     // setRequestedServices(state,value){
     //   state.requested_services = value
     // }
@@ -36,6 +40,7 @@ export default createStore({
     async getService_Providers(context) {
       try{
         let {results} = (await axios.get(`${osdURL}service-providers`)).data
+        console.log(results);
         if(results) {
           context.commit('setServiceProviders', results)
         }
@@ -107,7 +112,7 @@ export default createStore({
         const result = await axios.post(`${osdURL}service-providers/register-service-provider`, payload);
         console.log('sp ->' +result.data);
         if (result) {
-          context.commit('setServiceProviders', result.data)
+          context.commit('setServiceProvider', result.data)
           sweet({
             title: 'Success',
             text: 'Service provider registered successfully!',
@@ -136,7 +141,7 @@ export default createStore({
 async getUserRequests(context, payload) {
   try {
     console.log(payload);
-    const {results} = (await axios.get(`${osdURL}user/${payload}/requested-services`)).data;
+    const {results} = (await axios.get(`${osdURL}users/${payload}/requested-services`)).data;
     // const data = result.data; // Get the response data directly
     console.log('--->', results); // Log the data for debugging
 
@@ -160,6 +165,79 @@ async getUserRequests(context, payload) {
     });
   }
 },
+async loginUser(context, payload) {
+  try{
+  const {msg, token, result} = (await axios.post(`${osdURL}users/login`, payload)).data 
+  if(result){
+    context.commit('setUser', {msg, result})
+    cookies.set('LegitUser', {
+      msg, token, result
+    })
+    AuthenticateUser.applyToken(token)
+    sweet({
+      title: msg,
+      text: `Welcome back, 
+      ${result?.first_name} ${result?.last_name}`,
+      icon: "success",
+      timer: 5000
+    })
+      // router.push({name: 'home'})
+    }else {
+      sweet({
+        title: 'info',
+        text: msg,
+        icon: "info",
+        timer: 5000
+      })
+    }
+  }catch(e) {
+    sweet({
+      title: 'Error',
+      text: 'Failed to login.',
+      icon: "error",
+      timer: 5000
+    })
+  }
+  
+
+},
+async loginServiceProvider(context, payload) {
+  try{
+  const {msg, token, result} = (await axios.post(`${osdURL}service-providers/login`, payload)).data 
+  if(result){
+    context.commit('setServiceProvider', {msg, result})
+    cookies.set('LegitServiceProvider', {
+      msg, token, result
+    })
+    AuthenticateUser.applyToken(token)
+    sweet({
+      title: msg,
+      text: `Welcome back, 
+      ${result?.company_name} `,
+      icon: "success",
+      timer: 5000
+    })
+      // router.push({name: 'home'})
+    }else {
+      sweet({
+        title: 'info',
+        text: msg,
+        icon: "info",
+        timer: 5000
+      })
+    }
+  }catch(e) {
+    sweet({
+      title: 'Error',
+      text: 'Failed to login.',
+      icon: "error",
+      timer: 5000
+    })
+  }
+  
+
+},
+
 
 
   },

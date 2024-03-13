@@ -1,5 +1,4 @@
 <template>
-  <div>
     <NavbarDash />
 
     <div class="row mt-4" >
@@ -33,18 +32,19 @@
         </div>
       </div>
     </div>
-    <!-- <div class="row mx-auto" v-else>
-        <Spinner /> -->
+    <div class="row mx-auto" v-else>
+        <Spinner />
   </div>
 </template>
 
 <script>
 import NavbarDash from "../components/NavbarDash";
-
+import Spinner from "../components/Spinner"
 export default {
   name: "DashboardComp",
   components: {
     NavbarDash,
+    Spinner
   },
   data() {
     return {
