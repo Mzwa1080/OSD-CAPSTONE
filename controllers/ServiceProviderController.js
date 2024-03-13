@@ -76,7 +76,7 @@ spRouter.patch('/update/:id',(req,res)=>{
     }
 })
 
-spRouter.post('/login', verifyToken , (req,res)=>{
+spRouter.post('/login' , (req,res)=>{
     try{
         serviceProvider.login(req,res)
 
