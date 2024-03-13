@@ -10,7 +10,7 @@
     <div class="collapse justify-content-end navbar-collapse " id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <RouterLink to="/user/:id/requested-service(s)" class="nav-link mt-2" aria-current="page" >Requested Services</RouterLink>
+          <RouterLink :to="'/user/' + user + '/requested-service(s)'" class="nav-link mt-2" aria-current="page">Requested Services</RouterLink>
         </li>
         <li class="nav-item">
           <RouterLink to="/about" class="nav-link mt-2" > Contacts Us</RouterLink>
@@ -55,8 +55,27 @@
 </template>
 
 <script>
+      import {useCookies} from 'vue3-cookies';
     export default {
-        name : 'NavbarDashboardComp'
+     
+      name : 'NavbarDashboardComp',
+      
+      computed : {
+        user(){
+          const {cookies} = useCookies();
+          // console.log(cookies.keys('LegitUser'));
+          // console.log(cookies.get('LegitUser'));
+        
+        let userId = cookies.get('LegitUser');
+        // console.log(userId.result.user_id);
+        return userId.result.user_id;
+        },
+      },
+
+      mounted(){
+        this.$store.dispatch('getUserRequests')
+      }
+
     }
 </script>
 

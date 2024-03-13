@@ -164,16 +164,16 @@ export default createStore({
       }
     },
 
-    async getUserRequests(context) {
+    async getUserRequests(context, payload) {
       try{
-       const {cookies} = useCookies()
-       console.log(cookies.keys('LegitUser'));
-       console.log(cookies.get('LegitUser'));
+      //  const {cookies} = useCookies()
+      //  console.log(cookies.keys('LegitUser'));
+      //  console.log(cookies.get('LegitUser'));
         
-        let userId = cookies.get('LegitUser');
-        console.log(userId.result.user_id);
-
-        let {results} = (await axios.get(`${osdURL}user/${userId.result.user_id}/requested-services`)).data
+      //   let userId = cookies.get('LegitUser');
+      //   console.log(userId.result.user_id);
+      console.log(payload.id);
+        let {results} = (await axios.get(`${osdURL}user/${payload.id}/requested-services`)).data
         console.log(results);
         if(results) {
           context.commit('setRequestedServices', results)
