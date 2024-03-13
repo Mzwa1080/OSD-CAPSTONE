@@ -172,8 +172,8 @@ export default createStore({
         
       //   let userId = cookies.get('LegitUser');
       //   console.log(userId.result.user_id);
-      console.log(payload.id);
-        let {results} = (await axios.get(`${osdURL}user/${payload.id}/requested-services`)).data
+      // console.log(payload);
+        let {results} = (await axios.get(`${osdURL}user/${payload}/requested-services`)).data
         console.log(results);
         if(results) {
           context.commit('setRequestedServices', results)
