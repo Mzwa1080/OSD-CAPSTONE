@@ -1,7 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import { serviceProvider } from '../model/index.js'
-
+import {verifyToken} from '../middleware/AuthenticateUser.js'
 const spRouter=express.Router()
 
 //fetch all products
@@ -76,7 +76,7 @@ spRouter.patch('/update/:id',(req,res)=>{
     }
 })
 
-spRouter.post('/login',(req,res)=>{
+spRouter.post('/login', verifyToken , (req,res)=>{
     try{
         serviceProvider.login(req,res)
 

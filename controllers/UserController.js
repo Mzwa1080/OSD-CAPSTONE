@@ -61,7 +61,7 @@ userRouter.delete('/delete/:id',(req,res)=>{
     }
 })
 
-userRouter.post('/login', (req,res)=>{
+userRouter.post('/login', verifyToken,  (req,res)=>{
     try{
         users.login(req,res)
     
