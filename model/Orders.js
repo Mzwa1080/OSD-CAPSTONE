@@ -4,6 +4,28 @@ import { createToken } from "../middleware/AuthenticateUser.js";
 
 class Orders {
 
+  fetchAllOrders(req, res) {
+    const qry = `
+      SELECT requested_services.rs_id, requested_services.user_id, requested_services.sp_id, requested_services.service_requested, requested_services.request_date,
+      users.first_name AS user_first_name, users.address AS user_add,
+      service_providers.company_name AS sp_comp_name, service_providers.first_name AS sp_name,  service_providers.address AS sp_address, 
+      service_providers.service AS sp_service, service_providers.service_amount AS sp_amount, service_providers.phone_number AS sp_phonenumber
+      FROM requested_services 
+      INNER JOIN users ON requested_services.user_id = users.user_id
+      INNER JOIN service_providers  ON requested_services.sp_id = service_providers.sp_id;
+    `;
+  
+    db.query(qry, (err, results) => {
+      if (err) throw err;
+      res.json({
+        status: res.statusCode,
+        results,
+      });
+    });
+  }
+
+
+
 
   async addingOrders(req, res) {
     //payload
@@ -24,6 +46,9 @@ class Orders {
       // }
     });
   }
+
+
+
 
   fetchOrders(req, res) {
     const userId = req.params.id;
@@ -46,6 +71,8 @@ class Orders {
       });
     });
   }
+
+
   
   
 

@@ -7,7 +7,7 @@ const orderRouter=express.Router()
 
 orderRouter.get('/',(req,res)=>{
     try{
-        orders.fetchOrders(req,res)
+        orders.fetchAllOrders(req,res)
     }catch(e){
         res.json({
             status:res.statusCode,
