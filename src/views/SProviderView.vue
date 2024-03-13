@@ -19,10 +19,10 @@
       </div>
 
       <div class="row color mt-5  d-flex justify-content-center">
-        <div class="about m-5">
+        <div class="about m-5" v-if="serviceProvider && serviceProvider.about_company">
             <h2>About</h2>
-            <hr v-if="serviceProvider">
-            <p>{{ serviceProvider }}</p>
+            <hr >
+            <p>{{ serviceProvider.about_company }}</p>
         </div>
       </div>
 
@@ -41,7 +41,7 @@
     computed: {
           serviceProvider(){
             // console.log(this.$store.state.service_provider.about_company);
-              return this.$store.state.service_provider.about_company;
+              return this.$store.state.service_provider;
            }
     },
     mounted() {
