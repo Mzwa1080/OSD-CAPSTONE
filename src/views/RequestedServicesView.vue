@@ -15,6 +15,7 @@
           <th colspan="2">Amount</th>
           <th colspan="2">Cell No.</th>
           <th colspan="2">Address</th>
+          <th colspan="2">Requested Date</th>
           <th colspan="2">Action</th>
 
         </thead>
@@ -26,6 +27,8 @@
             <td colspan="2">{{ user.sp_amount }}</td>
             <td colspan="2">{{ user.sp_phonenumber }}</td>
             <td colspan="2">{{ user.sp_address }}</td>
+            <td colspan="2">{{ user.request_date }}</td>
+
             <td>
               <button type="submit" class="btn-danger btn"> cancel </button>
             </td>
