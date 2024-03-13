@@ -32,23 +32,8 @@
 
 export default {
 
-  computed : {
-    serviceProvider(){
-      return this.$store.state.order_requests
-    }
-  },
-  mounted(){
-      this.$store.dispatch('getUserRequests')
-      // this.$store.dispatch('getUserRequests')
-  }
-  
-  // mounted() {
-  //   // Retrieve user ID from cookies
-  //   const { cookies } = useCookies();
-  //   const userId = cookies.get('use_id'); // Assuming user ID is stored as 'user_id' in cookies
 
-  //   return { userId };
-  // }
+
 };
 </script>
 

@@ -72,9 +72,6 @@
         },
       },
 
-      mounted(){
-        this.$store.dispatch('getUserRequests')
-      }
 
     }
 </script>
