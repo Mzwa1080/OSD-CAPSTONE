@@ -12,9 +12,10 @@ export default createStore({
     service_providers : null,
     service_provider : null,
     user : null,
-    users : null
+    users : null,
+    requested_services : null
+
     // requested_services : null
-    // order_requests : null
   },
   getters: {
   },
@@ -30,17 +31,17 @@ export default createStore({
     } ,
     setUsers(state,value){
       state.users = value;
+    },
+    setRequestedServices(state,value){
+      state.requested_services = value
     }
-    // setRequestedServices(state,value){
-    //   state.requested_services = value
-    // }
   
   },
   actions: {
     async getService_Providers(context) {
       try{
         let {results} = (await axios.get(`${osdURL}service-providers`)).data
-        console.log(results);
+        // console.log(results);
         if(results) {
           context.commit('setServiceProviders', results)
         }
@@ -59,6 +60,31 @@ export default createStore({
         // console.log(result.result);
         if (result) {
           context.commit('setServiceProvider', result.result);
+        } else {
+          sweet({
+            title: 'Retrieving a service provider',
+            text: 'Service Provider was not found',
+            icon: 'info',
+            timer: 2000
+          });
+        }
+      } catch (e) {
+        sweet({
+          title: 'Error',
+          text: 'An error occurred while retrieving the service provider.',
+          icon: 'error',
+          timer: 2000
+        });
+      }
+    },
+    async getASingleUser(context, payload) {
+      console.log('payload '+ payload);
+
+      try {
+        const {results} = (await axios.get(`${osdURL}users/${payload}`)).data;
+        console.log(results);
+        if (results) {
+          context.commit('setUsers', results.results);
         } else {
           sweet({
             title: 'Retrieving a service provider',
@@ -138,33 +164,30 @@ export default createStore({
       }
     },
 
-async getUserRequests(context, payload) {
-  try {
-    console.log(payload);
-    const {results} = (await axios.get(`${osdURL}users/${payload}/requested-services`)).data;
-    // const data = result.data; // Get the response data directly
-    console.log('--->', results); // Log the data for debugging
+    async getUserRequests(context) {
+      try{
+       const {cookies} = useCookies()
+       console.log(cookies.keys('LegitUser'));
+       console.log(cookies.get('LegitUser'));
+        
+        let userId = cookies.get('LegitUser');
+        console.log(userId.result.user_id);
 
-    if (results) {
-      context.commit('setUser', results); // Assuming setUser mutation updates the user state
-    } else {
-      sweet({
-        title: 'Retrieving user requests',
-        text: 'User requests were not found',
-        icon: 'info',
-        timer: 2000
-      });
-    }
-  } catch (e) {
-    console.error('Error retrieving user requests:', e);
-    sweet({
-      title: 'Error',
-      text: 'An error occurred while retrieving user requests.',
-      icon: 'error',
-      timer: 2000
-    });
-  }
-},
+        let {results} = (await axios.get(`${osdURL}user/${userId.result.user_id}/requested-services`)).data
+        console.log(results);
+        if(results) {
+          context.commit('setRequestedServices', results)
+        }
+      }catch(e) {
+        sweet({
+          title: 'Error',
+          text: 'An error occurred when retrieving SERVICE PROVIDERS.',
+          icon: "error",
+          timer: 2000
+        }) 
+      }
+    },
+
 async loginUser(context, payload) {
   try{
   const {msg, token, result} = (await axios.post(`${osdURL}users/login`, payload)).data 
