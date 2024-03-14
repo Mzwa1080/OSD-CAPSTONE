@@ -34,14 +34,15 @@ class Orders {
     INSERT INTO requested_services
     SET ?;`;
 
-    db.query(qry, [data], (err) => {
+    db.query(qry, [data], (err, result) => {
 
-      console.log(data);
+      // console.log(data);
       if (err) throw err;
       //  else {
           res.json({
           status: res.statusCode,
-          msg: "You're registered",
+          msg: "Added the order",
+          result
         });
       // }
     });
