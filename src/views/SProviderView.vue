@@ -47,7 +47,6 @@
           />
         </div>
         <div class="col">
-          {{getUserId}}
           <form @submit.prevent="submitOrder">
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="row mb-4">
@@ -77,10 +76,8 @@
                             type="text"
                             id="form3Example3"
                             class="form-control"
-                            v-model = data.service_requested
                             
                           />
-                         <h1>{{selectedSP}}</h1> 
                        
               </div>
             </div>
@@ -131,21 +128,21 @@ export default {
   methods:{
 
     
-    getUser(){
+    // getUser(){
+    //   return userId.result_user_id
+    // },
+    // selectedProvider(){
+    //   return spId.result.sp_id;
+    // },
+    sendData(){
       let {cookies} = useCookies()
       let userId = cookies.get('LegitUser')
-      return userId.result_user_id
-    },
-    selectedProvider(){
-      let {cookies} = useCookies()
       let spId = cookies.get('LegitServiceProvider')
-      return spId.result.sp_id;
-    },
-    sendData(){
-     let data  = {
-        user_id : this.getUser,
-        sp_id : this.selectedProvider,
-        service_requested : this.service_requested,
+
+      let data  = {
+        user_id : userId.result.user_id,
+        sp_id : spId.result.sp_id,
+        // service_requested : this.service_requested,
 
       }
       console.log(data);
@@ -155,18 +152,6 @@ export default {
 
   },
 
-
-  // data() {
-  //   return {
-  //     data : {
-  //       user_id : this.getUser,
-  //       sp_id : this.selectedProvider,
-  //       service_requested : this.service_requested,
-
-  //     }
-
-  //   }
-  // },
   mounted() {
     this.$store.dispatch("getServiceProvider", { id: this.$route.params.id })
     // this.$store.dispatch('bookOrder', this.getUserId)
