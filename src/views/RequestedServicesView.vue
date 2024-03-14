@@ -21,7 +21,7 @@
         </thead>
         <tbody v-for="user in userRequests" :key="user.id">
           <tr>
-            <td colspan="2">{{user.user_id}}</td>
+            <td colspan="2">{{user.rs_id}}</td>
             <td colspan="2">{{ user.sp_comp_name }}</td>
             <td colspan="2">{{ user.sp_service }}</td>
             <td colspan="2">{{ user.sp_amount }}</td>
