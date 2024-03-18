@@ -30,7 +30,7 @@
             <td colspan="2">{{ user.request_date }}</td>
 
             <td>
-              <button type="submit" class="btn-danger btn" @click="deleteProvider(user.user_id)"> delete </button>
+              <button type="submit" class="btn-danger btn" @click="deleteProvider(user.rs_id)"> delete </button>
             </td>
           </tr>
    
