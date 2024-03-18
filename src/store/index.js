@@ -136,13 +136,19 @@ export default createStore({
 
     async registerServiceProvider(context, payload) {
       try {
-        let result = await axios.post(
+        let {result, msg, token} = await axios.post(
           `${osdURL}service-providers/register-service-provider`,
           payload
         );
         // console.log('result ->' + result.data);
         if (result) {
           context.commit("setServiceProvider", payload);
+          cookies.set("LegitServiceProvider", {
+            msg,
+            token,
+            result,
+          });
+          AuthenticateUser.applyToken(token);
           sweet({
             title: "Success",
             text: "SERVICE PROVIDER successfully!",
@@ -198,7 +204,7 @@ export default createStore({
     async getAllRequests(context) {
       try {
         let { results } = (await axios.get(`${osdURL}user`)).data;
-        console.log(results);
+        // console.log(results);
         if (results) {
           context.commit("setRequestedServices", results);
         }
@@ -214,7 +220,7 @@ export default createStore({
     
     async bookOrder(context, payload) {
       try {
-        console.log('payload ->'+payload);
+        // console.log('payload ->'+payload);
         let result = await axios.post(`${osdURL}user/add`, payload);
         // console.log('result ->' + result);
         if (result) {
@@ -321,10 +327,10 @@ export default createStore({
       }
     },
     async deleteSP(context, payload) {
-      console.log(payload);
+      // console.log(payload);
       try {
         const {results} = await axios.delete(`${osdURL}user/delete/${payload}`).data;
-        console.log(results);
+        // console.log(results);
         if (results) {
           context.dispatch('setRequestedServices'); 
           sweet({

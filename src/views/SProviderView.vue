@@ -46,7 +46,7 @@
           />
         </div>
         <div class="col">
-          <form @submit.prevent="sendData">
+          <form @submit.prevent="sendData()">
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="row mb-4" v-if="user()">
               <div class="col">
@@ -128,21 +128,19 @@ export default {
   methods :  {
     user(){
       const { cookies } = useCookies();
-
       let userID = cookies.get('LegitUser')
-      console.log(userID.result.user_id);
       return userID.result;
     },
 
     sendData(){
-      // this method must dispatch data when the button is clicked
+      return this.$store.dispatch('bookOrder', this.payload)
     }
   },
 
 
   mounted() {
     
-    console.log(this.user());
+    // console.log(this.sendData());
     this.$store.dispatch("getServiceProvider", { id: this.$route.params.id });
   },
 };
