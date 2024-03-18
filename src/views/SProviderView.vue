@@ -35,7 +35,6 @@
           <hr />
           <p>{{ serviceProvider.about_company }}</p>
         </div>
-
       </div>
 
       <div class="row">
@@ -47,7 +46,7 @@
           />
         </div>
         <div class="col">
-          <form @submit.prevent="submitOrder">
+          <form @submit.prevent="sendData">
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="row mb-4">
               <div class="col">
@@ -67,23 +66,18 @@
                 </div>
               </div>
 
-                          
-                          <div class="form-outline mb-4">
-                            <label class="form-label" for="form3Example3"
-                            >Request A Service</label
-                            >
-                            <input
-                            type="text"
-                            id="form3Example3"
-                            class="form-control"
-                            
-                          />
-                       
+              <div class="form-outline mb-4">
+                <label class="form-label" for="form3Example3"
+                  >Request A Service</label
+                >
+                <input
+                  type="text"
+                  id="form3Example3"
+                  class="form-control"
+                  v-model="payload.service_requested"
+                />
               </div>
             </div>
-
-
-            
 
             <!-- Submit button -->
             <button
@@ -93,7 +87,6 @@
             >
               Place order
             </button>
-
           </form>
         </div>
       </div>
@@ -103,58 +96,41 @@
 
 <script>
 import NavbarDash from "@/components/NavbarDash.vue";
-import { useCookies } from "vue3-cookies";
+// import { useCookies } from "vue3-cookies";
 
 export default {
   components: {
     NavbarDash,
   },
+  data() {
+    return {
+      payload: {
+        service_requested: "",
+      },
+    };
+  },
   computed: {
     serviceProvider() {
       return this.$store.state.service_provider;
     },
-    getUserId(){
-      let {cookies} = useCookies()
-      let userId = cookies.get('LegitUser')
-      return userId.result_user_id
-    },
-    selectedSP(){
-      let {cookies} = useCookies()
-      let spId = cookies.get('LegitServiceProvider')
-      return spId.result.sp_id;
-    },
-
   },
-  methods:{
-
-    
-    // getUser(){
-    //   return userId.result_user_id
+  methods: {
+    // sendData(){
+    //   let {cookies} = useCookies()
+    //   let userId = cookies.get('LegitUser')
+    //   let spId = cookies.get('LegitServiceProvider')
+    //   let data  = {
+    //     user_id : userId.result.user_id,
+    //     sp_id : spId.result.sp_id,
+    //     ...this.payload,
+    //   }
+    //   console.log(data.user_id);
+    //   // this.$route.dispatch('bookOrder', data)
     // },
-    // selectedProvider(){
-    //   return spId.result.sp_id;
-    // },
-    sendData(){
-      let {cookies} = useCookies()
-      let userId = cookies.get('LegitUser')
-      let spId = cookies.get('LegitServiceProvider')
-
-      let data  = {
-        user_id : userId.result.user_id,
-        sp_id : spId.result.sp_id,
-        // service_requested : this.service_requested,
-
-      }
-      console.log(data);
-      
-      this.$route.dispatch('bookOrder', data)
-    },
-
   },
 
   mounted() {
-    this.$store.dispatch("getServiceProvider", { id: this.$route.params.id })
-    // this.$store.dispatch('bookOrder', this.getUserId)
+    this.$store.dispatch("getServiceProvider", { id: this.$route.params.id });
   },
 };
 </script>

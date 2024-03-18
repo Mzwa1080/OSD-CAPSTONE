@@ -193,16 +193,16 @@ export default {
         img_url_users: '',
       },
       serviceProvider: {
-        first_name: this.first_name,
-        company_name : this.company_name,
-        about_company :this.about_company,
-        last_name: this.last_name,
-        email: this.email,
-        address: this.address,
-        img_url_sp: this.img_url_sp,
-        service: this.service,
-        password: this.service,
-        phone_number : this.phone_number
+        first_name: "",
+        company_name : '',
+        about_company :'',
+        last_name: '',
+        email: '',
+        address: '',
+        img_url_sp: '',
+        service: '',
+        password: '',
+        phone_number : ''
       },
     };
   },
@@ -212,8 +212,7 @@ export default {
     },
     submitServiceProviderForm() {
       this.$store.dispatch('registerServiceProvider', this.serviceProvider)
-   
-          this.$router.push('/dashboard');
+      this.$router.push('/dashboard');
  
     },
     submitForm() {

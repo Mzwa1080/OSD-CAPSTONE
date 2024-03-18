@@ -12,6 +12,8 @@
           <select v-model="selectedForm" id="formSelector" class="form-select">
             <option value="user">User Login</option>
             <option value="serviceProvider">Service Provider Login</option>
+            <option value="admin">Admin Login</option>
+
           </select>
         </div>
 
@@ -72,7 +74,6 @@
           </button>
         </form>
 
-        <!-- Service Provider Registration Form -->
         <form
           v-show="selectedForm === 'serviceProvider'"
           @submit.prevent="submitServiceProviderForm"
@@ -133,7 +134,62 @@
           </button>
         </form>
 
-        <!-- Register buttons -->
+        <form v-if="selectedForm === 'admin'" @submit.prevent="submitAdminForm">
+          <div
+            class="p-2 bg-image"
+            style="
+              background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+              height: 300px;
+            "
+          ></div>
+          <div
+            class="card mx-4 mx-md-4 shadow-5-strong"
+            style="
+              margin-top: -250px;
+              background: hsla(0, 0%, 100%, 0.8);
+              backdrop-filter: blur(30px);
+            "
+          >
+            <div class="card-body py-5 px-md-5">
+              <div class="row d-flex justify-content-center">
+                <div class="col-lg-8">
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline mb-4">
+                        <label class="form-label" for="form3Example3"
+                          >Email address</label
+                        >
+                        <input
+                          type="email"
+                          id="form3Example3"
+                          class="form-control"
+                          v-model="user.email"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline mb-4">
+                        <label class="form-label" for="form3ExampleAddress"
+                          >Password</label
+                        >
+                        <input
+                          type="password"
+                          id="form3ExampleAddress"
+                          class="form-control"
+                          v-model="user.password"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block mb-4">
+            Login
+          </button>
+        </form>
       </div>
     </div>
   </div>
@@ -153,6 +209,10 @@ export default {
         email: "",
         password: "",
       },
+      admin: {
+        email: "",
+        password: "",
+      },
     };
   },
   methods: {
@@ -162,6 +222,10 @@ export default {
     submitServiceProviderForm() {
       this.$store.dispatch("loginServiceProvider", this.serviceProvider);
       this.$router.push("/dashboard");
+    },
+    submitAdminForm() {
+      this.$store.dispatch("loginServiceProvider", this.admin);
+      this.$router.push("/admin");
     },
     submitForm() {
       if (this.selectedForm === "user") {

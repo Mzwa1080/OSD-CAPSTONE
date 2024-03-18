@@ -133,39 +133,41 @@ export default createStore({
         });
       }
     },
+
     async registerServiceProvider(context, payload) {
       try {
-        const result = await axios.post(
+        let result = await axios.post(
           `${osdURL}service-providers/register-service-provider`,
           payload
         );
-        console.log("sp ->" + result.data);
+        // console.log('result ->' + result.data);
         if (result) {
-          context.commit("setServiceProvider", result.data);
+          context.commit("setServiceProvider", payload);
           sweet({
             title: "Success",
-            text: "Service provider registered successfully!",
+            text: "SERVICE PROVIDER successfully!",
             icon: "success",
             timer: 2000,
           });
         } else {
           sweet({
             title: "Error",
-            text: "Failed to register service provider. Please try again.",
+            text: "Failed to register user. Please try again.",
             icon: "error",
             timer: 2000,
           });
         }
       } catch (error) {
-        console.error("Error during service provider registration:", error);
+        console.error("Error during user registration:", error);
         sweet({
           title: "Error",
-          text: "An error occurred during service provider registration.",
+          text: "An error occurred during user registration.",
           icon: "error",
           timer: 2000,
         });
       }
     },
+
 
     async getUserRequests(context, payload) {
       try {
@@ -301,6 +303,30 @@ export default createStore({
         });
       }
     },
+    async deleteSP(context, payload) {
+      console.log(payload);
+      try {
+        const {results} = (await axios.delete(`${osdURL}service-providers/delete/${payload}`)).data;
+        console.log(results);
+        if (results) {
+          context.dispatch('setServiceProvider'); 
+          sweet({
+            title: 'Service Provider Deleted',
+            text: results,
+            icon: 'success',
+            timer: 2000
+          });
+        }
+      } catch (error) {
+        sweet({
+          title: 'Error',
+          text: 'An error occurred when deleting the product.',
+          icon: 'error',
+          timer: 2000
+        });
+      }
+    },
+    
   },
   modules: {},
 });

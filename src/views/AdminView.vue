@@ -1,105 +1,87 @@
 <template>
-  <NavbarDash />
+<AdminDash />
 
-  <div class="row mt-4">
-    <div class="col">
-      <input type="text" v-model="searchTerm" style="height: 40px;" placeholder="Search" class="search"
-        @input="search" />
+
+
+
+  <div class="container">
+    <div  class="row mt-4 d-flex justify-content-center" v-if="serviceProviders">
+        <table class="table table-striped mt-4" >
+        <thead>
+          <th colspan="2">#</th>
+          <th colspan="2">First Name</th>
+          <th colspan="2">Last Name</th>
+          <th colspan="2">Company</th>
+          <th colspan="2">About Company</th>
+          <th colspan="2">Service Amount</th>
+          <th colspan="2">Address</th>
+          <th colspan="2">Cell no.</th>
+
+          <th colspan="2">Action</th>
+        </thead>
+        <tbody v-for="sp in serviceProviders" :key="sp.sp_id">
+          <tr>
+            <td colspan="2">{{sp.sp_id}}</td>
+            <td colspan="2">{{ sp.first_name }}</td>
+            <td colspan="2">{{ sp.last_name }}</td>
+            <td colspan="2">{{ sp.company_name }}</td>
+            <td colspan="2">{{ sp.about_company }}</td>
+            <td colspan="2">{{ sp.service_amount }}</td>
+            <td colspan="2">{{ sp.address }}</td>
+            <td colspan="2">{{ sp.phone_number }}</td>
+
+
+            <td>
+                <span>
+                    <button type="submit" class="btn-success btn" @click="add"> Add </button>
+                    <button type="submit" class="btn-danger btn" @click="deleteProvider(sp.sp_id)"> delete </button>
+
+                </span>
+            </td>
+          </tr>
+   
+  
+        </tbody>
+      </table>
     </div>
-
-
-
-
-  </div>
-
-  <div class="row mt-4 d-flex justify-content-center" v-if="serviceProviders">
-    <div class="" v-for="sp in serviceProviders" :key="sp.sp_id" style="width: 18rem">
-      <!-- <img :src="sp.img_url_sp" class="card-img-top" :alt="img_url_sp" /> -->
-      <!-- <div class="card-body">
-          <h5 class="card-title">{{sp.company_name}}</h5>
-          <p class="card-text">
-            {{ sp.service }}
-          </p>
-          <RouterLink :to="{name:'spview', params:{id: sp.sp_id} }">
-
-            <button class="btn btn-secondary">
-               Request A Service
-            </button>
-
-          </RouterLink>
-
-        </div> -->
-
-      <div class="parent">
-        <div class="card">
-          <div class="logo">
-
-            <span class="circle circle3"></span>
-            <span class="circle circle4"></span>
-            <span class="circle circle5">
-
-            </span>
-
-          </div>
-          <div class="glass"></div>
-          <div class="content">
-            <img :src="sp.img_url_sp" class="card-img-top" :alt="img_url_sp" />
-            <h5 class="card-title">{{ sp.company_name }}</h5>
-            <p class="card-text">{{ sp.service }}</p>
-
-          </div>
-          <div class="bottom">
-
-            <div class="social-buttons-container">
-
-            </div>
-            <div class="view-more">
-              <button class="view-more-button">
-
-                <router-link :to="{ name: 'spview', params: { id: sp.sp_id } }">
-                  Request A Service
-
-                </router-link>
-              </button>
-              <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="m6 9 6 6 6-6"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="row mx-auto" v-else>
+      <Spinner />
     </div>
   </div>
 
-  <div class="row mx-auto" v-else>
-    <Spinner />
-  </div>
 </template>
 
 <script>
-import NavbarDash from "../components/NavbarDash";
-import Spinner from "../components/Spinner"
+import AdminDash from "../components/AdminDash";
+
+import Spinner from "../components/Spinner";
 export default {
-  name: "DashboardComp",
+  name: "AdminComppp",
+
   components: {
-    NavbarDash,
-    Spinner
+    Spinner,
+    AdminDash
   },
+
   data() {
     return {
-      searchTerm: ''
+      searchTerm: "",
     };
   },
-
-
 
   computed: {
     serviceProviders() {
       return this.$store.state.service_providers;
     },
+
   },
 
+  methods : {
+    deleteProvider(id){
+        console.log(id);
+         this.$store.dispatch("deleteSP", id);
+    }
+  },
 
   mounted() {
     this.$store.dispatch("getService_Providers");
@@ -114,13 +96,22 @@ export default {
   perspective: 1000px;
 }
 
+th{
+    font-size: 20px;
+}
+
 .card {
   height: 100%;
   border-radius: 50px;
-  background: linear-gradient(135deg, rgb(0, 255, 214) 0%, rgb(8, 226, 96) 100%);
+  background: linear-gradient(
+    135deg,
+    rgb(0, 255, 214) 0%,
+    rgb(8, 226, 96) 100%
+  );
   transition: all 0.5s ease-in-out;
   transform-style: preserve-3d;
-  box-shadow: rgba(5, 71, 17, 0) 40px 50px 25px -40px, rgba(5, 71, 17, 0.2) 0px 25px 25px -5px;
+  box-shadow: rgba(5, 71, 17, 0) 40px 50px 25px -40px,
+    rgba(5, 71, 17, 0.2) 0px 25px 25px -5px;
 }
 
 .glass {
@@ -129,9 +120,13 @@ export default {
   inset: 8px;
   border-radius: 55px;
   border-top-right-radius: 100%;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.349) 0%, rgba(255, 255, 255, 0.815) 100%);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.349) 0%,
+    rgba(255, 255, 255, 0.815) 100%
+  );
   /* -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px); */
+    backdrop-filter: blur(5px); */
   transform: translate3d(0px, 0px, 25px);
   border-left: 1px solid white;
   border-bottom: 1px solid white;
@@ -319,7 +314,8 @@ export default {
 
 .parent:hover .card {
   transform: rotate3d(1, 1, 0, 30deg);
-  box-shadow: rgba(5, 71, 17, 0.3) 30px 50px 25px -40px, rgba(5, 71, 17, 0.1) 0px 25px 30px 0px;
+  box-shadow: rgba(5, 71, 17, 0.3) 30px 50px 25px -40px,
+    rgba(5, 71, 17, 0.1) 0px 25px 30px 0px;
 }
 
 .parent:hover .card .bottom .social-buttons-container .social-button {
