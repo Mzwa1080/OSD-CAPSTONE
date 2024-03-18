@@ -195,6 +195,23 @@ export default createStore({
       }
     },
 
+    async getAllRequests(context) {
+      try {
+        let { results } = (await axios.get(`${osdURL}user`)).data;
+        console.log(results);
+        if (results) {
+          context.commit("setRequestedServices", results);
+        }
+      } catch (e) {
+        sweet({
+          title: "Error",
+          text: "An error occurred when retrieving SERVICE PROVIDERS.",
+          icon: "error",
+          timer: 2000,
+        });
+      }
+    },
+    
     async bookOrder(context, payload) {
       try {
         console.log('payload ->'+payload);
