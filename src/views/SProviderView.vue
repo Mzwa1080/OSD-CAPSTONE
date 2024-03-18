@@ -48,24 +48,29 @@
         <div class="col">
           <form @submit.prevent="sendData">
             <!-- 2 column grid layout with text inputs for the first and last names -->
-            <div class="row mb-4">
+            <div class="row mb-4" v-if="user()">
               <div class="col">
                 <div data-mdb-input-init class="form-outline">
                   <label class="form-label" for="form6Example1"
                     >First name</label
                   >
-                  <input type="text" id="form6Example1" class="form-control" />
-                </div>
-              </div>
-              <div class="col">
-                <div data-mdb-input-init class="form-outline">
-                  <label class="form-label" for="form6Example2"
-                    >Last name</label
-                  >
-                  <input type="text" id="form6Example2" class="form-control" />
+                  <input type="text" id="form6Example1" class="form-control"
+                  :placeholder="user().first_name"   v-model="payload.user_first_name"
+                  />
                 </div>
               </div>
 
+               <div data-mdb-input-init class="form-outline">
+                  <label class="form-label" for="form6Example2"
+                  >Address</label
+                  >
+                  <input type="text" id="form6Example2" class="form-control" 
+                  :placeholder="user().address"
+                  v-model="payload.user_add"
+ />
+                </div>
+
+              
               <div class="form-outline mb-4">
                 <label class="form-label" for="form3Example3"
                   >Request A Service</label
@@ -84,6 +89,7 @@
               data-mdb-ripple-init
               type="submit"
               class="btn btn-primary btn-block mb-4"
+            
             >
               Place order
             </button>
@@ -96,8 +102,7 @@
 
 <script>
 import NavbarDash from "@/components/NavbarDash.vue";
-// import { useCookies } from "vue3-cookies";
-
+import { useCookies } from "vue3-cookies";
 export default {
   components: {
     NavbarDash,
@@ -106,6 +111,10 @@ export default {
     return {
       payload: {
         service_requested: "",
+        user_add : '',
+        user_first_name : "",
+        sp_id : this.$route.params.id,
+        
       },
     };
   },
@@ -113,23 +122,27 @@ export default {
     serviceProvider() {
       return this.$store.state.service_provider;
     },
-  },
-  methods: {
-    // sendData(){
-    //   let {cookies} = useCookies()
-    //   let userId = cookies.get('LegitUser')
-    //   let spId = cookies.get('LegitServiceProvider')
-    //   let data  = {
-    //     user_id : userId.result.user_id,
-    //     sp_id : spId.result.sp_id,
-    //     ...this.payload,
-    //   }
-    //   console.log(data.user_id);
-    //   // this.$route.dispatch('bookOrder', data)
-    // },
+
   },
 
+  methods :  {
+    user(){
+      const { cookies } = useCookies();
+
+      let userID = cookies.get('LegitUser')
+      console.log(userID.result.user_id);
+      return userID.result;
+    },
+
+    sendData(){
+      // this method must dispatch data when the button is clicked
+    }
+  },
+
+
   mounted() {
+    
+    console.log(this.user());
     this.$store.dispatch("getServiceProvider", { id: this.$route.params.id });
   },
 };
