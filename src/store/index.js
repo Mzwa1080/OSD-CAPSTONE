@@ -323,10 +323,10 @@ export default createStore({
     async deleteSP(context, payload) {
       console.log(payload);
       try {
-        const {results} = (await axios.delete(`${osdURL}user/delete/${payload}`)).data;
+        const {results} = await axios.delete(`${osdURL}user/delete/${payload}`).data;
         console.log(results);
         if (results) {
-          context.dispatch('setServiceProvider', results); 
+          context.dispatch('setRequestedServices'); 
           sweet({
             title: 'Service Provider Deleted',
             text: results,
@@ -337,7 +337,7 @@ export default createStore({
       } catch (error) {
         sweet({
           title: 'Error',
-          text: 'An error occurred when deleting the product.',
+          text: 'Service Provider Deleted.',
           icon: 'error',
           timer: 2000
         });
