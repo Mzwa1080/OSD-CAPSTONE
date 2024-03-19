@@ -89,7 +89,7 @@
               data-mdb-ripple-init
               type="submit"
               class="btn btn-primary btn-block mb-4"
-            
+           
             >
               Place order
             </button>
@@ -111,10 +111,8 @@ export default {
     return {
       payload: {
         service_requested: "",
-        user_add : '',
-        user_first_name : "",
         sp_id : this.$route.params.id,
-        
+        user_id : this.user().user_id,
       },
     };
   },
@@ -135,12 +133,14 @@ export default {
     sendData(){
       return this.$store.dispatch('bookOrder', this.payload)
     }
+
   },
 
 
   mounted() {
     
-    // console.log(this.sendData());
+    // console.log("this is user ->" + this.user().user_id);
+    // console.log(this.payload);
     this.$store.dispatch("getServiceProvider", { id: this.$route.params.id });
   },
 };

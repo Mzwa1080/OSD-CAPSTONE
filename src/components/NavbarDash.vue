@@ -55,7 +55,7 @@
 </template>
 
 <script>
-      import {useCookies} from 'vue3-cookies';
+import {useCookies} from 'vue3-cookies';
     export default {
      
       name : 'NavbarDashboardComp',

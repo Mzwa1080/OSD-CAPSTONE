@@ -14,21 +14,6 @@
 
   <div class="row mt-4 d-flex justify-content-center" v-if="serviceProviders">
     <div class="" v-for="sp in serviceProviders" :key="sp.sp_id" style="width: 18rem">
-      <!-- <img :src="sp.img_url_sp" class="card-img-top" :alt="img_url_sp" /> -->
-      <!-- <div class="card-body">
-          <h5 class="card-title">{{sp.company_name}}</h5>
-          <p class="card-text">
-            {{ sp.service }}
-          </p>
-          <RouterLink :to="{name:'spview', params:{id: sp.sp_id} }">
-
-            <button class="btn btn-secondary">
-               Request A Service
-            </button>
-
-          </RouterLink>
-
-        </div> -->
 
       <div class="parent">
         <div class="card">

@@ -187,7 +187,7 @@ export default createStore({
         let { results } = (
           await axios.get(`${osdURL}user/${payload}/requested-services`)
         ).data;
-        console.log(results);
+        // console.log(results);
         if (results) {
           context.commit("setRequestedServices", results);
         }
@@ -220,14 +220,14 @@ export default createStore({
     
     async bookOrder(context, payload) {
       try {
-        // console.log('payload ->'+payload);
+        console.log('payload ->'+payload);
         let result = await axios.post(`${osdURL}user/add`, payload);
-        // console.log('result ->' + result);
+        console.log('result ->' + result);
         if (result) {
           context.commit("setRequestedServices", payload);
           sweet({
             title: "Success",
-            text: "User registered successfully!",
+            text: "Your order is successfully placed!",
             icon: "success",
             timer: 2000,
           });
@@ -329,8 +329,31 @@ export default createStore({
     async deleteSP(context, payload) {
       // console.log(payload);
       try {
-        const {results} = await axios.delete(`${osdURL}user/delete/${payload}`).data;
+        const results = (await axios.delete(`${osdURL}user/${payload}/delete`)).data  ;
         // console.log(results);
+        if (results) {
+          context.dispatch('setRequestedServices'); 
+          sweet({
+            title: 'Service Provider Deleted',
+            text: results,
+            icon: 'success',
+            timer: 2000
+          });
+        }
+      } catch (error) {
+        sweet({
+          title: 'Error',
+          text: 'Failed to delete',
+          icon: 'error',
+          timer: 2000
+        });
+      }
+    },
+    async deleteAll(context, payload) {
+      console.log(payload);
+      try {
+        const {results} = await axios.delete(`${osdURL}user/delete/${payload}/requested-services`).data;
+        console.log(results);
         if (results) {
           context.dispatch('setRequestedServices'); 
           sweet({

@@ -30,19 +30,26 @@
             <td colspan="2">{{ user.request_date }}</td>
 
             <td>
-              <button type="submit" class="btn-danger btn" @click="deleteProvider(user.rs_id)"> delete </button>
+              <button type="submit" class="btn-danger btn" @click="deleteProvider(user.rs_id)"> Delete </button>
             </td>
           </tr>
    
   
         </tbody>
       </table>
+      <!-- v-for="users in userRequests" :key="users.id" -->
+      <div class="row" v-if="user">
+
+        <button type="submit" class="btn-danger btn" @click="ClearAll(user.user_id)"> Clear All </button>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
 import NavbarDash from '../components/NavbarDash.vue'
+import {useCookies} from 'vue3-cookies';
 
 export default {
   components : {
@@ -52,16 +59,29 @@ export default {
   computed : {
     userRequests(){
       return this.$store.state.requested_services
-    }
+    },
+
+    user(){
+        const {cookies} = useCookies();
+        let userId = cookies.get('LegitUser');
+        // console.log(userId.result.user_id);
+        return userId.result;
+        },
+    
   },
 
   methods : {
     deleteProvider(id){
         // console.log(id);
          this.$store.dispatch("deleteSP", id);
+    },
+    ClearAll(id){
+      console.log(id);
+      // console.log();
+      this.$store.dispatch('deleteAll', id)
     }
   },
-
+  
   mounted(){
     this.$store.dispatch('getUserRequests', this.$route.params.id)
   }

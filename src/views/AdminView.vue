@@ -33,7 +33,11 @@
 
             <td>
                 <span>
-                    <button type="submit" class="btn-success btn" @click="add"> Add </button>
+                  <RouterLink :to="{name : 'edit', params:{id:sp.sp_id}}">
+                    <button type="submit" class="btn-success btn" @click="add"> Edit </button>
+                  </RouterLink>
+  
+
                     <button type="submit" class="btn-danger btn" @click="deleteProvider(sp.sp_id)"> delete </button>
 
                 </span>
