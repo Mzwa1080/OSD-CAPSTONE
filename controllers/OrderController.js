@@ -52,6 +52,20 @@ orderRouter.get('/:id/requested-services',(req,res)=>{
 // })
 // //add a user
 
+orderRouter.delete('/delete/:id/',(req,res)=>{
+    try{
+        orders.deleteSIngleOrder(req,res)
+        // orders.deleteCompletetely(req,res)
+
+    }catch(e){
+
+        res.json({
+            status:res.statusCode,
+            msg:'failed to delete a user',
+        })
+    }
+})
+
 
 
 orderRouter.delete('/delete/:id/requested-services',(req,res)=>{
