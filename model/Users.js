@@ -64,7 +64,7 @@ class Users {
   deleteUser(req, res) {
     const qry = `DELETE FROM users WHERE user_id=${req.params.id} ;`;
     // const user = req.body
-
+    
     db.query(qry, (err) => {
       if (err) throw err;
       res.json({
@@ -73,6 +73,8 @@ class Users {
       });
     });
   }
+  
+
 
   async updateUser(req, res) {
     let data = req.body;

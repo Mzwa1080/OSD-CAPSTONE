@@ -109,7 +109,22 @@ class ServiceProviders {
   }
 
   deleteProvider(req, res) {
+
     const qry = `DELETE FROM service_providers WHERE sp_id=${req.params.id} ;`;
+    // const user = req.body
+    let dataID = req.params.id
+    console.log(dataID);
+    db.query(qry, (err) => {
+      if (err) throw err;
+      res.json({
+        status: res.statusCode,
+        msg: "Service Provider is deleted!",
+      });
+    });
+  }
+
+  deleteAll(req, res) {
+    const qry = `DELETE FROM service_providers ;`;
     // const user = req.body
 
     db.query(qry, (err) => {

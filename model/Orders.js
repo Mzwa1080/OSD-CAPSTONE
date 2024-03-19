@@ -24,9 +24,6 @@ class Orders {
     });
   }
 
-
-
-
   async addingOrders(req, res) {
     //payload
     let data = req.body;
@@ -47,8 +44,6 @@ class Orders {
       // }
     });
   }
-
-
 
 
   fetchOrders(req, res) {
@@ -74,6 +69,19 @@ class Orders {
   }
 
 
+  deleteCompletetely(req, res) {
+    console.log(req.params.id);
+    const qry = `DELETE FROM requested_services WHERE user_id=${req.params.id} ;`;
+    // const user = req.body
+
+    db.query(qry, (err) => {
+      if (err) throw err;
+      res.json({
+        status: res.statusCode,
+        msg: "Users are deleted!",
+      });
+    });
+  }
   
   
 
