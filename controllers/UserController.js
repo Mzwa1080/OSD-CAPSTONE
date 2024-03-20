@@ -47,10 +47,10 @@ userRouter.post('/register',bodyParser.json(),(req,res)=>{
         })
     }
 })
-
-userRouter.delete('/delete/:id',(req,res)=>{
+// delete everything 
+userRouter.delete('/:id/delete',(req,res)=>{
     try{
-        users.deleteUser(req,res)
+        users.deleteEveythingInCart(req,res)
 
     }catch(e){
 
@@ -60,6 +60,8 @@ userRouter.delete('/delete/:id',(req,res)=>{
         })
     }
 })
+// THIS ROUTE MUST GET USERID-AND DELETE-PRODUCT-ID(SELECTED PRODUCT)
+
 
 userRouter.post('/login',  (req,res)=>{
     try{
@@ -72,6 +74,7 @@ userRouter.post('/login',  (req,res)=>{
         })
     }
 })
+
 
 export{
     userRouter,express

@@ -68,18 +68,16 @@ class Orders {
     });
   }
 
-  deleteSIngleOrder(req, res) {
-    console.log(req.params.id);
-    const qry = `DELETE FROM requested_services WHERE user_id=${req.params.id} ;`;
-    // const user = req.body
 
-    db.query(qry, (err) => {
-      if (err) throw err;
-      res.json({
-        status: res.statusCode,
-        msg: "Users are deleted!",
-      });
-    });
+   deleteSingleOrder(user_Id, rs_id) {
+    const qry = `DELETE FROM requested_services WHERE user_id=${user_Id} AND rs_id=${rs_id}`;
+    try {
+        const result =  db.query(qry, [user_Id, rs_id]);
+        return result;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
   }
 
   deleteCompletetely(req, res) {
@@ -91,7 +89,7 @@ class Orders {
       if (err) throw err;
       res.json({
         status: res.statusCode,
-        msg: "Users are deleted!",
+        msg: "User successfully deleted!",
       });
     });
   }
