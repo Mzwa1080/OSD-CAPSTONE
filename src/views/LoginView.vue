@@ -163,7 +163,7 @@
                           type="email"
                           id="form3Example3"
                           class="form-control"
-                          v-model="user.email"
+                          v-model="admin.email"
                         />
                       </div>
                     </div>
@@ -176,7 +176,20 @@
                           type="password"
                           id="form3ExampleAddress"
                           class="form-control"
-                          v-model="user.password"
+                          v-model="admin.password"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline mb-4">
+                        <label class="form-label" for="form3ExampleAddress"
+                          >Password</label
+                        >
+                        <input
+                          type="text"
+                          id="form3ExampleAddress"
+                          class="form-control"
+                          v-model="admin.userRole"
                         />
                       </div>
                     </div>
@@ -212,6 +225,7 @@ export default {
       admin: {
         email: "",
         password: "",
+        userRole : "admin"
       },
     };
   },
@@ -224,8 +238,8 @@ export default {
       this.$router.push("/dashboard");
     },
     submitAdminForm() {
-      this.$store.dispatch("loginServiceProvider", this.admin);
-      this.$router.push("/admin");
+      this.$store.dispatch("loginAdmin", this.admin);
+      this.$router.push("/dashboard");
     },
     submitForm() {
       if (this.selectedForm === "user") {
@@ -240,3 +254,6 @@ export default {
 </script>
 
 <style scoped></style>
+
+
+

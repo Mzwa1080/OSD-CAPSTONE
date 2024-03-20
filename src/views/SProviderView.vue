@@ -131,7 +131,7 @@ export default {
     },
 
     sendData(){
-      return this.$store.dispatch('bookOrder', this.payload)
+      return this.$store.dispatch('userOrder', this.payload)
     }
 
   },

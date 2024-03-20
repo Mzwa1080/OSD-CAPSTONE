@@ -61,19 +61,17 @@ export default {
       return this.$store.state.requested_services
     },
 
-    user(){
-        const {cookies} = useCookies();
-        let userId = cookies.get('LegitUser');
-        // console.log(userId.result.user_id);
-        return userId.result;
-        },
+    user() {
+      const {cookies} = useCookies()
+      return cookies.get('LegitUser').result;
+    },
     
   },
 
   methods : {
     deleteProvider(id){
         // console.log(id);
-         this.$store.dispatch("deleteSP", id);
+        this.$store.dispatch("deleteSingleOrder", { user_id: this.user.user_id, rs_id: id });
     },
     ClearAll(id){
       console.log(id);
