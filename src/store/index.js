@@ -130,6 +130,8 @@ export default createStore({
             icon: 'success',
             timer: 2000
           });
+          window.location.reload();
+
         }
       } catch (error) {
         sweet({
@@ -183,12 +185,14 @@ export default createStore({
           context.commit("setUser", result);
           cookies.set("LegitUser", {result, token });
           AuthenticateUser.applyToken(token);
+          window.location.reload();
           sweet({
             title: msg,
             text: `Welcome back, ${result?.first_name}`,
             icon: "success",
             timer: 5000,
           });
+
         } else {
           sweet({
             title: "info",
@@ -332,6 +336,8 @@ export default createStore({
             result,
           });
           AuthenticateUser.applyToken(token);
+          window.location.reload();
+
           sweet({
             title: msg,
             text: `Welcome back, 
@@ -364,6 +370,7 @@ export default createStore({
         const { msg, token, result } = (
           await axios.post(`${osdURL}users/login`, payload)
         ).data;
+        window.location.reload();
         if (result && result.userRole === "admin") {
           context.commit("setUser", result);
           cookies.set("LoggedAdmin", {  result, token, userRole: result?.userRole }); // Store user token in cookies
@@ -375,6 +382,7 @@ export default createStore({
             icon: "success",
             timer: 5000,
           });
+
         } else {
           sweet({
             title: "info",
@@ -407,6 +415,8 @@ export default createStore({
             icon: 'success',
             timer: 2000
           });
+          window.location.reload();
+
         }
       } catch (error) {
         sweet({
@@ -495,7 +505,9 @@ export default createStore({
             icon: 'success',
             timer: 2000
           });
+        window.location.reload();
         }
+
       } catch (error) {
         sweet({
           title: 'Error',

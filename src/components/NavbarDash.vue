@@ -19,6 +19,9 @@
           <li v-if="isAdminLoggedIn" class="nav-item">
             <router-link :to="{ name: 'admin' }" class="nav-link mt-2">Admin Dashboard</router-link>
           </li>
+          <li v-if="isUserLoggedIn" class="nav-item">
+            <router-link to="/user-profile" class="nav-link mt-2">User Profile</router-link>
+          </li>
           <li class="nav-item">
             <router-link to="/about" class="nav-link mt-2">Contacts Us</router-link>
           </li>
@@ -42,8 +45,13 @@ export default {
   computed: {
     isAdminLoggedIn() {
       const { cookies } = useCookies();
-      let loggedAdmin = cookies.get('LoggedAdmin');
-      return loggedAdmin && loggedAdmin.result && loggedAdmin.result.userRole === 'admin';
+   
+      return cookies.get('LoggedAdmin')?.result?.userRole === 'admin';
+    },
+    isUserLoggedIn() {
+      const { cookies } = useCookies();
+      // let legitUser = ;
+      return cookies.get('LegitUser')?.result?.userRole === 'user';
     },
     requestedServicesRoute() {
       const { cookies } = useCookies();
