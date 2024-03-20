@@ -69,14 +69,14 @@ class Orders {
   }
 
 
-   deleteSingleOrder(user_Id, rs_id) {
+  async deleteSingleOrder(user_Id, rs_id) {
     const qry = `DELETE FROM requested_services WHERE user_id=${user_Id} AND rs_id=${rs_id}`;
     try {
-        const result =  db.query(qry, [user_Id, rs_id]);
-        return result;
+      await db.query(qry, [user_Id, rs_id]);
+      return "Order successfully deleted";
     } catch (error) {
-        console.error(error);
-        throw error;
+      console.error(error);
+      throw error;
     }
   }
 
