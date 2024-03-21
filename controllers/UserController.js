@@ -47,21 +47,24 @@ userRouter.post('/register',bodyParser.json(),(req,res)=>{
         })
     }
 })
-// delete everything 
-userRouter.delete('/:id/delete',(req,res)=>{
-    try{
-        users.deleteEveythingInCart(req,res)
 
-    }catch(e){
-
-        res.json({
-            status:res.statusCode,
-            msg:'failed to delete a user',
-        })
+userRouter.delete('/:id/delete', async (req, res) => {
+    try {
+      const userId = req.params.id;
+      // Call your deleteUser function passing the userId
+       users.deleteUser(userId);
+      res.json({
+        status: res.statusCode,
+        msg: "User deleted!",
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        status: res.statusCode,
+        msg: "Failed to delete user",
+      });
     }
-})
-// THIS ROUTE MUST GET USERID-AND DELETE-PRODUCT-ID(SELECTED PRODUCT)
-
+  });
 
 userRouter.post('/login',  (req,res)=>{
     try{

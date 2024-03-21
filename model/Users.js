@@ -61,17 +61,26 @@ class Users {
     });
   }
 
-  deleteUser(req, res) {
-    const qry = `DELETE FROM users WHERE user_id=${req.params.id} ;`;
-    // const user = req.body
+  // deleteUser(req, res) {
+  //   const qry = `DELETE FROM users WHERE user_id=${req.params.id} ;`;
+  //   // const user = req.body
     
-    db.query(qry, (err) => {
-      if (err) throw err;
-      res.json({
-        status: res.statusCode,
-        msg: "Users are deleted!",
+  //   db.query(qry, [req.body], (err) => {
+  //     if (err) throw err;
+  //     res.json({
+  //       status: res.statusCode,
+  //       msg: "User deleted!",
+  //     });
+  //   });
+  // }
+
+   deleteUser(userId) {
+      const qry = `DELETE FROM users WHERE user_id=${userId}`;
+      db.query(qry, [userId], (err, result) => {
+        if (err) {
+          console.error(err);
+        }
       });
-    });
   }
 
 
