@@ -37,7 +37,7 @@ class Users {
     let user = {
       email: data.email,
       password: data.password,
-      file: req.file.img_url_users 
+      img_url_users: req.file.img_url_users 
     };
       const qry = `
       INSERT INTO users
