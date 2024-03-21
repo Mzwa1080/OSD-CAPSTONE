@@ -34,10 +34,11 @@ class Users {
   async registerUser(req, res) {
     let data = req.body;
     data.password = await hash(data?.password, 10);
+    let img_url_users = req.file ? req.file.img_url_users : null;
     let user = {
-      email: data.email,
-      password: data.password,
-      img_url_users: req.file.img_url_users 
+        email: data.email,
+        password: data.password,
+        img_url_users: img_url_users
     };
       const qry = `
       INSERT INTO users
