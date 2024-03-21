@@ -41,7 +41,7 @@
             <div class="view-more">
               <button class="view-more-button">
 
-                <router-link :to="{ name: 'spview', params: { id: sp.sp_id } }">
+                <router-link :to="{ name: 'spview', params: { id: sp.sp_id } }" @click="requestService(sp)">
                   Request A Service
 
                 </router-link>
@@ -65,6 +65,8 @@
 <script>
 import NavbarDash from "../components/NavbarDash";
 import Spinner from "../components/Spinner"
+import swal from 'sweetalert';
+import { useCookies } from "vue3-cookies";
 export default {
   name: "DashboardComp",
   components: {
@@ -83,6 +85,27 @@ export default {
     serviceProviders() {
       return this.$store.state.service_providers;
     },
+  checkAdminLoggedIn() {
+    const { cookies } = useCookies();
+    const loggedAdmin = cookies.get('LoggedAdmin');
+    return loggedAdmin && loggedAdmin.result?.userRole === 'admin';
+  },
+  checkUserLoggedIn() {
+    const { cookies } = useCookies();
+    const legitUser = cookies.get('LegitUser');
+    return legitUser && legitUser.result?.userRole === 'user';
+  }
+  },
+
+  methods: {
+    requestService(serviceProvider) {
+      if (!this.checkUserLoggedIn && !this.checkAdminLoggedIn) {
+        swal("Oops!", "You need to login to request a service.", "error");
+        this.$router.push('/osd')
+      } else {
+        this.$router.push({ name: 'spview', params: { id: serviceProvider.sp_id } });
+      }
+    }
   },
 
 

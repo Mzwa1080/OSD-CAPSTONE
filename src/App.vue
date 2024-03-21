@@ -1,25 +1,35 @@
 <template>
 
   <router-view/>
+
+  
+  <Footer/>
+
 </template>
 
 
 <script>
+import Footer from './components/Footer.vue'
 
   export default{
     components : {
-    
+    Footer
     }
   }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50; */
+  
   text-align: center;
-  color: #2c3e50;
+  color: #052d3a;
+    border: 0;
+    border-bottom: 4px solid #2488C8;
+    background-color: #fff;
 }
 
 nav {

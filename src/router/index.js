@@ -3,9 +3,14 @@ import HomeView from '../views/HomeView.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/osd',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/',
+    name: 'HomeVieww',
+    component: () => import(/* webpackChunkName: "about" */ '../views/FirstHomeView.vue')
   },
   {
     path: '/dashboard',
@@ -64,6 +69,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/EditAdmin.vue')
   }
+
 ]
 
 const router = createRouter({

@@ -1,0 +1,80 @@
+<template>
+        <footer>
+            <div class="footer-top" style="padding-top: 90px; background-color: var(--dark);">
+                <div class="container">
+                    <div class="row gy-4">
+                        <div class="col-lg-4">
+                            <img class="logo" src="#" alt="">
+                        </div>
+                        <div class="col-lg-2 text-black">
+                            <h5>Brand</h5> <!--Make Bold-->
+                            <ul class="list-unstyled">
+                                <li><a href="#home">About</a></li>
+                                <li><a href="#services">Services</a></li>
+                                <li><a href="#pricing">Pricing</a></li>
+                                <li><a href="#team">Team</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-2 text-black">
+                            <h5>More</h5> <!--Make Bold-->
+                            <ul class="list-unstyled">
+                                <li><a href="#">FAQ's</a></li>
+                                <li><a href="#">Privacy & Policy</a></li>
+                                <li><a href="#">Warranty</a></li>
+                                <li><a href="#">Shipment</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 text-black">
+                            <h5>Contact</h5> <!--Make Bold-->
+                            <ul class="list-unstyled">
+                                <li>Address: 5 Pine Road, Bongweni, Khayelitsha, 7784</li>
+                                <li>Email: info@osd-connect.co.za</li>
+                                <li>Phone: (00) 000-0000</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="footer-bottom py-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-0">© 2023 copyright all right reserved | One Stop Dot Connect (PTY)</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="social-icons">
+                                <a href="#"><i class='bx bxl-youtube'></i></a>
+                                <a href="#"><i class='bx bxl-facebook'></i></a>
+                                <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                                <a href="#"><i class='bx bxl-whatsapp'></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+</template>
+
+<script>
+
+export default{
+    name : 'FooterComp'
+}
+
+</script>
+
+<style scoped>
+
+
+.footer-top a {
+    color: black ;
+    background-color: dimgrey;
+}
+
+.footer-bottom {
+    background-color: lightgrey;
+}
+
+</style>

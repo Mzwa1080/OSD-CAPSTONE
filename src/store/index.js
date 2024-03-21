@@ -124,13 +124,13 @@ export default createStore({
         // console.log(results);
         if (results) {
           context.dispatch('setRequestedServices'); 
+          window.location.reload();
           sweet({
             title: 'Service Provider Deleted',
             text: results,
             icon: 'success',
             timer: 2000
           });
-          window.location.reload();
 
         }
       } catch (error) {
@@ -212,15 +212,9 @@ export default createStore({
     },
     async logoutUser(context) {
       try {
-        // Clear cookies
         const { remove } = useCookies();
         remove('LegitUser');
-
-        // Perform any additional cleanup or state mutation if needed
         context.commit("setUser", null);
-
-        // Redirect to homepage or login page
-        // Assuming you're using Vue Router
         router.push('/');
       } catch (error) {
         console.error("Error during logout:", error);
@@ -337,7 +331,6 @@ export default createStore({
           });
           AuthenticateUser.applyToken(token);
           window.location.reload();
-
           sweet({
             title: msg,
             text: `Welcome back, 
@@ -409,13 +402,13 @@ export default createStore({
         // console.log(data);
         if (data) {
           context.dispatch('setRequestedServices'); 
+          window.location.reload();
           sweet({
             title: 'Service Provider Deleted',
             text: data.msg,
             icon: 'success',
             timer: 2000
           });
-          window.location.reload();
 
         }
       } catch (error) {
@@ -499,13 +492,13 @@ export default createStore({
         const {data} = await axios.delete(`${osdURL}user/${payload.user_id}/delete/${payload.rs_id}/requested-services`)  ;
         if (data) {
           context.dispatch('getUserRequests', payload.user_id); 
+          window.location.reload();
           sweet({
             title: 'Service Provider Deleted',
             text: data.msg,
             icon: 'success',
             timer: 2000
           });
-        window.location.reload();
         }
 
       } catch (error) {
