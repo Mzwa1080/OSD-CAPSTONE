@@ -32,26 +32,25 @@ class Users {
   }
 
   async registerUser(req, res) {
+    //payload
     let data = req.body;
     data.password = await hash(data?.password, 10);
-    let img_url_users = req.file ? req.file.img_url_users : null;
     let user = {
-        email: data.email,
-        password: data.password,
-        img_url_users: img_url_users
+      email: data.email,
+      password: data.password,
     };
-      const qry = `
-      INSERT INTO users
-      SET ?;
+    const qry = `
+    INSERT INTO users
+    SET ?;
     `;
     db.query(qry, [data], (err) => {
       if (err) {
         res.json({
           status: res.statusCode,
-          msg: "Already exists. Please use another email address",
+          msg: "Already exists.please use another email address",
         });
       } else {
-        // Create token and send response
+        //create token
         let token = createToken(user);
         res.json({
           status: res.statusCode,
@@ -61,7 +60,6 @@ class Users {
       }
     });
   }
-  
 
 
    deleteUser(userId) {
