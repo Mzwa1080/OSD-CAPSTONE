@@ -5,7 +5,7 @@ class Users {
 
   fetchUsers(req, res) {
     const qry = `
-    SELECT user_id,first_name,last_name, userRole, email, phone_number, address , password, img_url_users
+    SELECT user_id,first_name,last_name, userRole, email, address , password, img_url_users
     FROM users;  `;
 
     db.query(qry, (err, results) => {
@@ -19,7 +19,7 @@ class Users {
 
   fetchUser(req, res) {
     const qry = `
-    SELECT user_id,first_name,last_name, userRole, email, phone_number, address , img_url_users, password
+    SELECT user_id,first_name,last_name, userRole, email, address , img_url_users, password
     FROM users WHERE user_id=${req.params.id} `;
 
     db.query(qry, (err, result) => {
