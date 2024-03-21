@@ -2,6 +2,8 @@ import express from "express"
 import bodyParser from "body-parser";
 import { users } from "../model/index.js";
 import { verifyToken } from "../middleware/AuthenticateUser.js";
+import multer from "multer";
+const upload = multer({ dest: 'uploads/' });
 
 const userRouter=express.Router()
 //fetch users
@@ -15,6 +17,16 @@ userRouter.get('/' ,(req,res)=>{
         })
     }
 })
+userRouter.post('/register', upload.single('file'), (req, res) => {
+  try {
+    users.registerUser(req, res);
+  } catch (e) {
+    res.json({
+      status: res.statusCode,
+      msg: 'Failed to add new user'
+    });
+  }
+});
 //fetch user
 userRouter.get('/:id' , (req,res)=>{
     try{
@@ -37,16 +49,9 @@ userRouter.patch('/update/:id', bodyParser.json(),(req,res)=>{
     }
 })
 //add a user
-userRouter.post('/register',bodyParser.json(),(req,res)=>{
-    try{
-        users.registerUser(req,res)
-    }catch(e){
-        res.json({
-            status:res.statusCode,
-            msg:'failed to add new user'
-        })
-    }
-})
+ // Specify the directory to store uploaded files
+
+
 
 userRouter.delete('/:id/delete', async (req, res) => {
     try {

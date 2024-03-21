@@ -32,25 +32,25 @@ class Users {
   }
 
   async registerUser(req, res) {
-    //payload
     let data = req.body;
     data.password = await hash(data?.password, 10);
     let user = {
       email: data.email,
       password: data.password,
+      file: req.file.img_url_users 
     };
-    const qry = `
-    INSERT INTO users
-    SET ?;
+      const qry = `
+      INSERT INTO users
+      SET ?;
     `;
     db.query(qry, [data], (err) => {
       if (err) {
         res.json({
           status: res.statusCode,
-          msg: "already exists.please use another email address",
+          msg: "Already exists. Please use another email address",
         });
       } else {
-        //create token
+        // Create token and send response
         let token = createToken(user);
         res.json({
           status: res.statusCode,
@@ -60,23 +60,12 @@ class Users {
       }
     });
   }
+  
 
-  // deleteUser(req, res) {
-  //   const qry = `DELETE FROM users WHERE user_id=${req.params.id} ;`;
-  //   // const user = req.body
-    
-  //   db.query(qry, [req.body], (err) => {
-  //     if (err) throw err;
-  //     res.json({
-  //       status: res.statusCode,
-  //       msg: "User deleted!",
-  //     });
-  //   });
-  // }
 
    deleteUser(userId) {
       const qry = `DELETE FROM users WHERE user_id=${userId}`;
-      db.query(qry, [userId], (err, result) => {
+      db.query(qry, [userId], (err) => {
         if (err) {
           console.error(err);
         }
