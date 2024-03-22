@@ -78,9 +78,9 @@ class Users {
     if (data?.password) {
       data.password = await hash(data?.password, 8);
     }
-    const qry = `UPDATE users SET ? WHERE user_id = ?`;
-  
-    db.query(qry, [data, req.params.id], (err) => {
+    const qry = ` UPDATE users SET ? WHERE user_id=${req.params.id};`;
+
+    db.query(qry, [req.body], (err) => {
       if (err) throw err;
 
       res.json({
