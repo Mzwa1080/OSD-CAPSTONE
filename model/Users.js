@@ -26,7 +26,7 @@ class Users {
       if (err) throw err;
       res.json({
         status: res.statusCode,
-        result,
+        result : result[0]
       });
     });
   }
