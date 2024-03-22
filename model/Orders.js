@@ -69,10 +69,10 @@ class Orders {
   }
 
 
-  async deleteSingleOrder(user_Id, rs_id) {
+   deleteSingleOrder(user_Id, rs_id) {
     const qry = `DELETE FROM requested_services WHERE user_id=${user_Id} AND rs_id=${rs_id}`;
     try {
-      await db.query(qry, [user_Id, rs_id]);
+       db.query(qry, [user_Id, rs_id]);
       return "Order successfully deleted";
     } catch (error) {
       console.error(error);
@@ -80,7 +80,7 @@ class Orders {
     }
   }
 
-  deleteCompletetely(req, res) {
+   deleteCompletely(req, res) {
     console.log(req.params.id);
     const qry = `DELETE FROM requested_services WHERE user_id=${req.params.id} ;`;
     // const user = req.body

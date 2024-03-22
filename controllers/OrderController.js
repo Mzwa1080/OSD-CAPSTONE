@@ -97,6 +97,21 @@ orderRouter.delete('/:user_id/delete/:rs_id/requested-services', async (req,res)
         })
     }
 })
+orderRouter.delete('/:id/requested-services', async (req,res)=>{
+    try{
+        orders.deleteCompletely(req,res)
+        res.json({
+            status:res.statusCode,
+            msg:"Order successfully deleted"
+        })
+    }catch(e){
+
+        res.json({
+            status:res.statusCode,
+            msg:'failed to delete a order',
+        })
+    }
+})
 
 // orderRouter.post('/login', (req,res)=>{
 //     try{

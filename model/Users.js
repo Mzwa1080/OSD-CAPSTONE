@@ -69,7 +69,7 @@ class Users {
       if (err) throw err;
       res.json({
         status: res.statusCode,
-        msg: "Service Provider is deleted!",
+        msg: "User is successfully deleted!",
       });
     });
   }
