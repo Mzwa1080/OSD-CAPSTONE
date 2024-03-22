@@ -32,8 +32,6 @@ class ServiceProviders {
   async registerServiceProvider(req, res) {
     //payload
     let data = req.body;
-
-    console.log(data.password);
     data.password = await hash(data?.password, 8);
     let user = {
       email: data.email,
@@ -42,7 +40,7 @@ class ServiceProviders {
     const qry = `
         INSERT INTO service_providers SET ?;`;
 
-    db.query(qry, [data], (err) => {
+    db.query(qry, [data], (err,result) => {
       if (err) {
         res.json({
           status: res.statusCode,
@@ -55,6 +53,7 @@ class ServiceProviders {
           status: res.statusCode,
           token,
           msg: "You're registered",
+          result
         });
       }
     });
