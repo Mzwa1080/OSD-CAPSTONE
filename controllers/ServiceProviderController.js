@@ -66,9 +66,7 @@ spRouter.delete('/delete/:id',(req,res)=>{
 spRouter.patch('/update/:id',(req,res)=>{
     try{
         serviceProvider.updateProvider(req,res)
-
     }catch(e){
-
         res.json({
             status:res.statusCode,
             msg:'Failed to update Service Provider',

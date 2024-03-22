@@ -136,7 +136,7 @@ class ServiceProviders {
   }
 
   async updateProvider(req, res) {
-    const qry = ` UPDATE service_providers SET ? WHERE sp_id=${req.params.id};`;
+    const qry = `UPDATE service_providers SET ? WHERE sp_id=${req.params.id};`;
 
     db.query(qry, [req.body], (err) => {
       if (err) throw err;
