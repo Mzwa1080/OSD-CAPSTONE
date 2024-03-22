@@ -55,3 +55,11 @@ section {
     padding-bottom: 120px;
 }
 </style>
+
+
+"first_name": "Mzwakhe",
+            "last_name": "Louw",
+            "userRole": "admin",
+            "email": "mzwakheR@gmail.com",
+            "address": "34 khaltsha street",
+            "password": "

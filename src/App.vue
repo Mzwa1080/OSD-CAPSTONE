@@ -19,6 +19,7 @@ import Footer from './components/Footer.vue'
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Damion&family=Dancing+Script:wght@400..700&family=Kavoon&family=Lobster&family=Londrina+Solid&family=Roboto:wght@100;300&family=Salsa&family=Vesper+Libre:wght@400;500;700;900&display=swap');
 #app {
   /* font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

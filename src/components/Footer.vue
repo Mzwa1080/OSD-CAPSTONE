@@ -74,16 +74,14 @@ computed:{
 <style scoped>
 
 
-:root {
-    --primary: #1e7ff7cb;
-    --dark: #21252f;
-    --body: #21252f;
-    --white: #ffffff;
-    --box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-}
-
 footer{
     background-color: lightgrey;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    z-index: 1;
+    height: auto;
+    margin-top: 10rem;
 }
 
 </style>

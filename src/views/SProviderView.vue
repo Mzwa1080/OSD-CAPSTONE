@@ -1,6 +1,6 @@
 <template>
   <NavbarDash />
-
+<div class="container-fluid">
   <div
     class="p-2 bg-image"
     style="
@@ -98,14 +98,20 @@
       </div>
     </div>
   </div>
+
+</div>
+
+  <Footer/>
 </template>
 
 <script>
 import NavbarDash from "@/components/NavbarDash.vue";
 import { useCookies } from "vue3-cookies";
+import Footer from '../components/Footer.vue'
 export default {
   components: {
     NavbarDash,
+    Footer
   },
   data() {
     return {

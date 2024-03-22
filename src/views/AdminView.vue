@@ -260,23 +260,27 @@ export default {
       adminAddNewUser: {
         first_name: '',
         last_name: '',
-        userRole: '',
+        userRole: 'user',
         email: '',
         password: '',
         address: '',
         img_url_users: null
       },
       adminAddService: {
-        company_name: '',
-        about_company: '',
-        service: '',
-        service_amount: '',
-        address: '',
-        first_name: '',
-        last_name: '',
-        phone_number: '',
-        password: ''
-
+        company_name :'',
+first_name :'',
+about_company:'',
+email:'',
+last_name:'',
+birth_date:'',
+address:'',
+service:'',
+service_amount:'',
+phone_number:'',
+created_date:'',
+active_column:'',
+password:'',
+img_url_sp  :'',      
 
       },
     };

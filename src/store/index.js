@@ -43,13 +43,13 @@ export default createStore({
 
     // ====   USERS ======
     async getASingleUser(context, payload) {
-      console.log("payload " + payload);
 
       try {
-        const { results } = (await axios.get(`${osdURL}users/${payload}`)).data;
-        console.log(results);
-        if (results) {
-          context.commit("setUsers", results.results);
+
+        const  result  = (await axios.get(`${osdURL}users/${payload.user_id}`)).data;
+        console.log(result.result);
+        if (result) {
+          context.commit("setUser", result.result);
         } else {
           sweet({
             title: "Retrieving a service provider",
@@ -199,6 +199,7 @@ export default createStore({
     },
     async editUser(context, payload) {
       try {
+        console.log('what is payload ->', payload);
         const { data } = await axios.patch(`${osdURL}users/update/${payload.user_id}`, payload)
         if (data) {
           context.dispatch("setUsers");
@@ -248,9 +249,10 @@ export default createStore({
     },
     async registerUser(context, payload) {
       try {
-        let result = await axios.post(`${osdURL}users/register`, payload);
-        // console.log('result ->' + result.data);
-        if (result) {
+        console.log(payload);
+        let {data} = await axios.post(`${osdURL}users/register`, payload);
+        // console.log('data ->' + data.data);
+        if (data) {
           context.commit("setUser", payload);
           sweet({
             title: "Success",
@@ -258,6 +260,7 @@ export default createStore({
             icon: "success",
             timer: 2000,
           });
+          router.push('/dashboard');
         } else {
           sweet({
             title: "Error",
@@ -276,6 +279,9 @@ export default createStore({
         });
       }
     },
+
+
+    
 
 
 
@@ -352,16 +358,16 @@ export default createStore({
     async registerServiceProvider(context, payload) {
       try {
         console.log(payload);
-        let data =( await axios.post(`${osdURL}service-providers/register-service-provider`, payload)).data;
-        if (data) {
-          context.commit("setServiceProvider");
+        let msg = await axios.post(`${osdURL}service-providers/register-service-provider`, payload);
+        if (msg) {
+          context.commit("setServiceProvider", payload);
           sweet({
             title: "Success",
-            text: "SERVICE PROVIDER successfully!",
+            text: "Service Provider successfully!",
             icon: "success",
             timer: 2000,
           });
-          
+          router.push('/dashboard');
         } else {
           sweet({
             title: "Error",
@@ -459,6 +465,8 @@ export default createStore({
         });
       }
     },
+
+
     // async editUserService(context, payload) {
     //   try {
     //     const { data } = await axios.patch(`${osdURL}service-provider/update/${payload.sp_id}`, payload)

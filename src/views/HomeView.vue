@@ -75,8 +75,9 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
-
+          <div class="row d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
+          </div>
         </form>
 
         <!-- Service Provider Registration Form -->
@@ -172,7 +173,9 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
+          <div class="row d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
+          </div>
         </form>
 
         <!-- Register buttons -->
@@ -211,7 +214,11 @@ export default {
         img_url_sp: '',
         service: '',
         password: '',
-        phone_number: ''
+        phone_number: '',
+        active_column : '',
+        created_date : '',
+        birth_date :'',
+        service_amount :''
       },
     };
   },
@@ -221,8 +228,6 @@ export default {
     },
     submitServiceProviderForm() {
       this.$store.dispatch('registerServiceProvider', this.serviceProvider)
-      this.$router.push('/dashboard');
-
     },
     submitForm() {
       if (this.selectedForm === 'user') {
