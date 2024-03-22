@@ -63,13 +63,13 @@ class Users {
 
   deleteUser(req, res) {
     const qry = `DELETE FROM users WHERE user_id=${req.params.id} ;`;
-    // const user = req.body
-    
+    let dataID = req.params.id
+    console.log(dataID);
     db.query(qry, (err) => {
       if (err) throw err;
       res.json({
         status: res.statusCode,
-        msg: "Users are deleted!",
+        msg: "Service Provider is deleted!",
       });
     });
   }

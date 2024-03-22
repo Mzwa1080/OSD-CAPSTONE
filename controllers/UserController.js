@@ -48,18 +48,12 @@ userRouter.post('/register',bodyParser.json(),(req,res)=>{
     }
 })
 
-userRouter.delete('/:id/delete', async (req, res) => {
+userRouter.delete('/:id/delete', (req, res) => {
     try {
-      const userId = req.params.id;
-      // Call your deleteUser function passing the userId
-       users.deleteUser(userId);
-      res.json({
-        status: res.statusCode,
-        msg: "User deleted!",
-      });
+       users.deleteUser(req,res);
+  
     } catch (error) {
-      console.error(error);
-      res.status(500).json({
+      res.json({
         status: res.statusCode,
         msg: "Failed to delete user",
       });
