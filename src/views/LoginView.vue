@@ -1,14 +1,12 @@
 <template>
-  <div>
+  <NavbarDash />
+  <div class="container">
     <div class="row d-flex justify-content-center">
       <div class="col-lg-8">
         <h2 class="fw-bold mb-5">Login</h2>
 
-        <!-- Form Selector -->
         <div class="mb-4">
-          <label for="formSelector" class="form-label"
-            >Select Login Type:</label
-          >
+          <label for="formSelector" class="form-label">Select Login Type:</label>
           <select v-model="selectedForm" id="formSelector" class="form-select">
             <option value="user">User Login</option>
             <option value="serviceProvider">Service Provider Login</option>
@@ -18,49 +16,29 @@
         </div>
 
         <form v-if="selectedForm === 'user'" @submit.prevent="submitForm">
-          <div
-            class="p-2 bg-image"
-            style="
+          <div class="p-2 bg-image" style="
               background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
               height: 300px;
-            "
-          ></div>
-          <div
-            class="card mx-4 mx-md-4 shadow-5-strong"
-            style="
+            "></div>
+          <div class="card mx-4 mx-md-4 shadow-5-strong" style="
               margin-top: -250px;
               background: hsla(0, 0%, 100%, 0.8);
               backdrop-filter: blur(30px);
-            "
-          >
+            ">
             <div class="card-body py-5 px-md-5">
               <div class="row d-flex justify-content-center">
                 <div class="col-lg-8">
                   <div class="row">
                     <div class="col-md-6 mb-4">
                       <div class="form-outline mb-4">
-                        <label class="form-label" for="form3Example3"
-                          >Email address</label
-                        >
-                        <input
-                          type="email"
-                          id="form3Example3"
-                          class="form-control"
-                          v-model="user.email"
-                        />
+                        <label class="form-label" for="form3Example3">Email address</label>
+                        <input type="email" required id="form3Example3" class="form-control" v-model="user.email" />
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
                       <div class="form-outline mb-4">
-                        <label class="form-label" for="form3ExampleAddress"
-                          >Password</label
-                        >
-                        <input
-                          type="password"
-                          id="form3ExampleAddress"
-                          class="form-control"
-                          v-model="user.password"
-                        />
+                        <label class="form-label" for="form3ExampleAddress">Password</label>
+                        <input type="password" required id="form3ExampleAddress" class="form-control" v-model="user.password" />
                       </div>
                     </div>
                   </div>
@@ -69,58 +47,40 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary btn-block mb-4">
-            Login
-          </button>
+          <div class="col-md-12 d-grid">
+
+            <button type="submit" class="btn btn-primary btn-block mb-4 ">
+              Login
+            </button>
+          </div>
+
         </form>
 
-        <form
-          v-show="selectedForm === 'serviceProvider'"
-          @submit.prevent="submitServiceProviderForm"
-        >
-          <div
-            class="p-1 bg-image"
-            style="
+        <form v-show="selectedForm === 'serviceProvider'" @submit.prevent="submitServiceProviderForm">
+          <div class="p-1 bg-image" style="
               background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
               height: 300px;
-            "
-          ></div>
-          <div
-            class="card mx-4 mx-md-4 shadow-5-strong"
-            style="
+            "></div>
+          <div class="card mx-4 mx-md-4 shadow-5-strong" style="
               margin-top: -250px;
               background: hsla(0, 0%, 100%, 0.8);
               backdrop-filter: blur(30px);
-            "
-          >
+            ">
             <div class="card-body py-5 px-md-5">
               <div class="row d-flex justify-content-center">
                 <div class="col-lg-8">
                   <div class="row">
                     <div class="col-md-6 mb-4">
                       <div class="form-outline mb-4">
-                        <label class="form-label" for="form3Example3"
-                          >Email address</label
-                        >
-                        <input
-                          type="email"
-                          id="form3Example3"
-                          class="form-control"
-                          v-model="serviceProvider.email"
-                        />
+                        <label class="form-label" for="form3Example3">Email address</label>
+                        <input type="email" required id="form3Example3" class="form-control" v-model="serviceProvider.email" />
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
                       <div class="form-outline mb-4">
-                        <label class="form-label" for="form3ExampleAddress"
-                          >Password</label
-                        >
-                        <input
-                          type="password"
-                          id="form3ExampleAddress"
-                          class="form-control"
-                          v-model="serviceProvider.password"
-                        />
+                        <label class="form-label" for="form3ExampleAddress">Password</label>
+                        <input type="password" required id="form3ExampleAddress" class="form-control"
+                          v-model="serviceProvider.password" />
                       </div>
                     </div>
                   </div>
@@ -129,68 +89,44 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary btn-block mb-4">
-            Login
-          </button>
+          <div class="col-md-12 d-grid">
+
+            <button type="submit" class="btn btn-primary btn-block mb-4 ">
+              Login
+            </button>
+          </div>
         </form>
 
         <form v-if="selectedForm === 'admin'" @submit.prevent="submitAdminForm">
-          <div
-            class="p-2 bg-image"
-            style="
+          <div class="p-2 bg-image" style="
               background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
-              height: 300px;
-            "
-          ></div>
-          <div
-            class="card mx-4 mx-md-4 shadow-5-strong"
-            style="
-              margin-top: -250px;
+              height: 400px;
+            "></div>
+          <div class="card mx-4 mx-md-4 shadow-5-strong" style="
+              margin-top: -370px;
               background: hsla(0, 0%, 100%, 0.8);
               backdrop-filter: blur(30px);
-            "
-          >
+            ">
             <div class="card-body py-5 px-md-5">
               <div class="row d-flex justify-content-center">
                 <div class="col-lg-8">
                   <div class="row">
                     <div class="col-md-6 mb-4">
                       <div class="form-outline mb-4">
-                        <label class="form-label" for="form3Example3"
-                          >Email address</label
-                        >
-                        <input
-                          type="email"
-                          id="form3Example3"
-                          class="form-control"
-                          v-model="admin.email"
-                        />
+                        <label class="form-label" for="form3Example3">Email address</label>
+                        <input type="email"  required id="form3Example3" class="form-control" v-model="admin.email" />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-outline ">
+                        <label class="form-label" for="form3ExampleAddress">Password</label>
+                        <input type="password" required id="form3ExampleAddress" class="form-control" v-model="admin.password" />
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
                       <div class="form-outline mb-4">
-                        <label class="form-label" for="form3ExampleAddress"
-                          >Password</label
-                        >
-                        <input
-                          type="password"
-                          id="form3ExampleAddress"
-                          class="form-control"
-                          v-model="admin.password"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                      <div class="form-outline mb-4">
-                        <label class="form-label" for="form3ExampleAddress"
-                          >User Role</label
-                        >
-                        <input
-                          type="text"
-                          id="form3ExampleAddress"
-                          class="form-control"
-                          v-model="admin.userRole"
-                        />
+                        <label class="form-label" for="form3ExampleAddress">User Role</label>
+                        <input type="text" required id="form3ExampleAddress" class="form-control" v-model="admin.userRole" />
                       </div>
                     </div>
                   </div>
@@ -199,9 +135,12 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary btn-block mb-4">
-            Login
-          </button>
+          <div class="col-md-12 d-grid">
+
+            <button type="submit" class="btn btn-primary btn-block mb-4 ">
+              Login
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -209,7 +148,11 @@
 </template>
 
 <script>
+  import NavbarDash from '../components/NavbarDash.vue'
 export default {
+  components :{
+    NavbarDash
+  },
   data() {
     return {
       selectedForm: "user",
@@ -225,7 +168,7 @@ export default {
       admin: {
         email: "",
         password: "",
-        userRole : "admin"
+        userRole: "admin"
       },
     };
   },
@@ -254,6 +197,3 @@ export default {
 </script>
 
 <style scoped></style>
-
-
-

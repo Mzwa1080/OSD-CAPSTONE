@@ -25,7 +25,6 @@ import Footer from './components/Footer.vue'
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50; */
   
-  text-align: center;
   color: #052d3a;
     border: 0;
     border-bottom: 4px solid #2488C8;
@@ -33,7 +32,7 @@ import Footer from './components/Footer.vue'
 }
 
 nav {
-  padding: 30px;
+  padding: 0px;
 }
 
 nav a {

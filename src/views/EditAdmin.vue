@@ -1,11 +1,9 @@
 <template>
-  <div>
+  <div class="container">
     <h1>We'll edit</h1>
     <h1>We must get the user_id, selected in the edit</h1>
 
     
-
-    <h1></h1>
   </div>
 </template>
 
@@ -20,8 +18,7 @@ export default {
   },
 
   mounted() {
-    // console.log("this is user ->" + this.user().user_id);
-    console.log(this.editUser);
+
     this.$store.dispatch("getServiceProvider", { id: this.$route.params.id });
   },
 };

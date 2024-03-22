@@ -10,7 +10,7 @@
                         <p class="text-white my-3">One Stop Dot Connect is a registered company that consists of individuals 
                             who are innovative and planning to provide a One (<b>STOP</b>) Solution and 
                             Connect many Service Providers as possible around the community with our customers through our digital solution.</p>
-                        <a href="#contact" class="btn btn-outline-light">Contact Us</a>
+                        <RouterLink to="/contact"  class="btn btn-outline-light">Contact Us</RouterLink>
                     </div>
                 </div>
             </div>

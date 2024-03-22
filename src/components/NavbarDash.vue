@@ -42,7 +42,7 @@
             <router-link to="/osd" class="nav-link mt-2">Signup</router-link>
           </li>
           <li v-if="checkIfUserLoggedIn || ifAdminLoggedIn" class="nav-item">
-            <button class="btn btn-success mt-2" @click="logout">Logout</button>
+            <button class="btn btn-primary mt-2" @click="logout">Logout</button>
           </li>
         </ul>
       </div>

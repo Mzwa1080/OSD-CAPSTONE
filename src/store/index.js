@@ -86,36 +86,7 @@ export default createStore({
       }
     },
 
-    async registerUser(context, payload) {
-      try {
-        let result = await axios.post(`${osdURL}users/register`, payload);
-        // console.log('result ->' + result.data);
-        if (result) {
-          context.commit("setUser", payload);
-          sweet({
-            title: "Success",
-            text: "User registered successfully!",
-            icon: "success",
-            timer: 2000,
-          });
-        } else {
-          sweet({
-            title: "Error",
-            text: "Failed to register user. Please try again.",
-            icon: "error",
-            timer: 2000,
-          });
-        }
-      } catch (error) {
-        console.error("Error during user registration:", error);
-        sweet({
-          title: "Error",
-          text: "An error occurred during user registration.",
-          icon: "error",
-          timer: 2000,
-        });
-      }
-    },
+
 
     async deleteSingleUser(context, payload) {
       // console.log(payload);
@@ -226,7 +197,85 @@ export default createStore({
         });
       }
     },
+    async editUser(context, payload) {
+      try {
+        const { data } = await axios.patch(`${osdURL}users/update/${payload.user_id}`, payload)
+        if (data) {
+          context.dispatch("setUsers");
+          window.location.reload();
+          sweet({
+            title: 'Success',
+            text: `User updated successfully` ,
+            icon: "success",
+            timer: 5000,
+          });
 
+        } 
+      } catch (e) {
+        sweet({
+          title: "Error",
+          text: `Failed to update user.`,
+          icon: "error",
+          timer: 5000,
+        });
+      }
+    },
+
+    async deleteAdminUser(context, payload) {
+      console.log(payload);
+      try {
+        const data = await axios.delete(`${osdURL}users/${payload}/delete`) ;
+        console.log(data);
+        if (data) {
+          context.dispatch('getUsers'); 
+          window.location.reload();
+          sweet({
+            title: 'Success',
+            text: data.msg,
+            icon: 'success',
+            timer: 2000
+          });
+
+        }
+      } catch (error) {
+        sweet({
+          title: 'Error',
+          text: 'Failed to delete',
+          icon: 'error',
+          timer: 2000
+        });
+      }
+    },
+    async registerUser(context, payload) {
+      try {
+        let result = await axios.post(`${osdURL}users/register`, payload);
+        // console.log('result ->' + result.data);
+        if (result) {
+          context.commit("setUser", payload);
+          sweet({
+            title: "Success",
+            text: "User registered successfully!",
+            icon: "success",
+            timer: 2000,
+          });
+        } else {
+          sweet({
+            title: "Error",
+            text: "Failed to register user. Please try again.",
+            icon: "error",
+            timer: 2000,
+          });
+        }
+      } catch (error) {
+        console.error("Error during user registration:", error);
+        sweet({
+          title: "Error",
+          text: "An error occurred during user registration.",
+          icon: "error",
+          timer: 2000,
+        });
+      }
+    },
 
 
 
@@ -272,30 +321,47 @@ export default createStore({
         });
       }
     },
+    async updateService(context, payload) {
+      console.log(payload.sp_id);
+      try {
 
+
+        const  {result}  = (await axios.patch(`${osdURL}service-providers/update/${payload.sp_id}`)).data
+        if (result) {
+          context.dispatch("setServiceProviders");
+          window.location.reload();
+          sweet({
+            title: 'Success',
+            text: `Service updated successfully` ,
+            icon: "success",
+            timer: 5000,
+          });
+
+        } 
+      } catch (e) {
+        sweet({
+          title: "Error",
+          text: `Failed to update service.`,
+          icon: "error",
+          timer: 5000,
+        });
+      }
+    },
 
 
     async registerServiceProvider(context, payload) {
       try {
-        let {result, msg, token} = await axios.post(
-          `${osdURL}service-providers/register-service-provider`,
-          payload
-        );
-        // console.log('result ->' + result.data);
-        if (result) {
-          context.commit("setServiceProvider", payload);
-          cookies.set("LegitServiceProvider", {
-            msg,
-            token,
-            result,
-          });
-          AuthenticateUser.applyToken(token);
+        console.log(payload);
+        let data =( await axios.post(`${osdURL}service-providers/register-service-provider`, payload)).data;
+        if (data) {
+          context.commit("setServiceProvider");
           sweet({
             title: "Success",
             text: "SERVICE PROVIDER successfully!",
             icon: "success",
             timer: 2000,
           });
+          
         } else {
           sweet({
             title: "Error",
@@ -366,8 +432,7 @@ export default createStore({
         window.location.reload();
         if (result && result.userRole === "admin") {
           context.commit("setUser", result);
-          cookies.set("LoggedAdmin", {  result, token, userRole: result?.userRole }); // Store user token in cookies
-          // console.log(cookies.get("LoggedAdmin"));
+          cookies.set("LoggedAdmin", {  result, token, userRole: result?.userRole }); 
           AuthenticateUser.applyToken(token);
           sweet({
             title: msg,
@@ -394,6 +459,29 @@ export default createStore({
         });
       }
     },
+    // async editUserService(context, payload) {
+    //   try {
+    //     const { data } = await axios.patch(`${osdURL}service-provider/update/${payload.sp_id}`, payload)
+    //     if (data) {
+    //       context.dispatch("setServiceProviders");
+    //       window.location.reload();
+    //       sweet({
+    //         title: 'Success',
+    //         text: `User updated successfully` ,
+    //         icon: "success",
+    //         timer: 5000,
+    //       });
+
+    //     } 
+    //   } catch (e) {
+    //     sweet({
+    //       title: "Error",
+    //       text: `Failed to update user.`,
+    //       icon: "error",
+    //       timer: 5000,
+    //     });
+    //   }
+    // },
 
     async deleteSP(context, payload) {
       // console.log(payload);

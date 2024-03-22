@@ -1,65 +1,62 @@
 <template>
   <NavbarDash />
 
-  <div class="row mt-4">
-    <div class="col">
-      <input type="text" v-model="searchTerm" style="height: 40px;" placeholder="Search" class="search"
+  <div class="row d-flex  mt-4">
+    <div class=" row justify-content-center">
+      <input type="text" v-model="searchTerm" style="height: 40px;"  placeholder="Search" class="search"
         @input="search" />
     </div>
-
-
-
-
   </div>
 
-  <div class="row mt-4 d-flex justify-content-center" v-if="serviceProviders">
-    <div class="" v-for="sp in serviceProviders" :key="sp.sp_id" style="width: 18rem">
+  <div class="container">
 
-      <div class="parent">
-        <div class="card">
-          <div class="logo">
-
-            <span class="circle circle3"></span>
-            <span class="circle circle4"></span>
-            <span class="circle circle5">
-
-            </span>
-
-          </div>
-          <div class="glass"></div>
-          <div class="content">
-            <img :src="sp.img_url_sp" class="card-img-top" :alt="img_url_sp" />
-            <h5 class="card-title">{{ sp.company_name }}</h5>
-            <p class="card-text">{{ sp.service }}</p>
-
-          </div>
-          <div class="bottom">
-
-            <div class="social-buttons-container">
-
+    <div class="row  d-flex justify-content-center" v-if="serviceProviders">
+      <div class="m-2" v-for="sp in serviceProviders" :key="sp.sp_id" style="width: 18rem">
+  
+        <div class="parent">
+          <div class="card">
+            <div class="logo">
+  
+              <span class="circle circle2"> </span>
+              <span class="circle circle3"></span>
+              <span class="circle circle4"></span>
+  
             </div>
-            <div class="view-more">
-              <button class="view-more-button">
-
-                <router-link :to="{ name: 'spview', params: { id: sp.sp_id } }" @click="requestService(sp)">
-                  Request A Service
-
-                </router-link>
-              </button>
-              <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="m6 9 6 6 6-6"></path>
-              </svg>
+            <div class="glass"></div>
+            <div class="content">
+              <img :src="sp.img_url_sp" class="card-img-top" :alt="img_url_sp" />
+              <h5 class="card-title">{{ sp.company_name }}</h5>
+              <p class="card-text">{{ sp.service }}</p>
+  
+            </div>
+            <div class="bottom">
+  
+              <div class="social-buttons-container">
+  
+              </div>
+              <div class="view-more">
+                <button class="view-more-button">
+  
+                  <router-link :to="{ name: 'spview', params: { id: sp.sp_id } }" @click="requestService(sp)">
+                    Request A Service
+  
+                  </router-link>
+                </button>
+                <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6"></path>
+                </svg>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="row mx-auto" v-else>
+      <Spinner />
+    </div>
   </div>
 
-  <div class="row mx-auto" v-else>
-    <Spinner />
-  </div>
 </template>
 
 <script>
@@ -67,6 +64,7 @@ import NavbarDash from "../components/NavbarDash";
 import Spinner from "../components/Spinner"
 import swal from 'sweetalert';
 import { useCookies } from "vue3-cookies";
+
 export default {
   name: "DashboardComp",
   components: {
@@ -126,7 +124,7 @@ export default {
 .card {
   height: 100%;
   border-radius: 50px;
-  background: linear-gradient(135deg, rgb(0, 255, 214) 0%, rgb(8, 226, 96) 100%);
+  background: linear-gradient(135deg, rgb(0, 255, 214) 0%,#052d3a 100%);
   transition: all 0.5s ease-in-out;
   transform-style: preserve-3d;
   box-shadow: rgba(5, 71, 17, 0) 40px 50px 25px -40px, rgba(5, 71, 17, 0.2) 0px 25px 25px -5px;
@@ -154,14 +152,14 @@ export default {
 
 .content .title {
   display: block;
-  color: #00894d;
+  color: #052d3a;
   font-weight: 900;
   font-size: 20px;
 }
 
 .content .text {
   display: block;
-  color: rgba(0, 137, 78, 0.7647058824);
+  color:#052d3a;;
   font-size: 15px;
   margin-top: 20px;
 }
@@ -333,7 +331,7 @@ export default {
 
 .parent:hover .card .bottom .social-buttons-container .social-button {
   transform: translate3d(0, 0, 50px);
-  box-shadow: rgba(5, 71, 17, 0.2) -5px 20px 10px 0px;
+  box-shadow:#052d3a -5px 20px 10px 0px;
 }
 
 .parent:hover .card .logo .circle2 {
