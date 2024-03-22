@@ -83,7 +83,7 @@ class Users {
   SET ?
   WHERE user_id=${req.params.id};`;
 
-    db.query(qry, [data], (err) => {
+    db.query(qry, [data, req.params.id], (err) => {
       if (err) throw err;
 
       res.json({
