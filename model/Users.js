@@ -47,7 +47,7 @@ class Users {
       if (err) {
         res.json({
           status: res.statusCode,
-          msg: "Already exists.please use another email address",
+          msg: "already exists.please use another email address",
         });
       } else {
         //create token
@@ -61,14 +61,17 @@ class Users {
     });
   }
 
-
-   deleteUser(userId) {
-      const qry = `DELETE FROM users WHERE user_id=${userId}`;
-      db.query(qry, [userId], (err) => {
-        if (err) {
-          console.error(err);
-        }
+  deleteUser(req, res) {
+    const qry = `DELETE FROM users WHERE user_id=${req.params.id} ;`;
+    // const user = req.body
+    
+    db.query(qry, (err) => {
+      if (err) throw err;
+      res.json({
+        status: res.statusCode,
+        msg: "Users are deleted!",
       });
+    });
   }
 
 
@@ -78,9 +81,12 @@ class Users {
     if (data?.password) {
       data.password = await hash(data?.password, 8);
     }
-    const qry = ` UPDATE users SET ? WHERE user_id=${req.params.id};`;
+    const qry = `
+  UPDATE users 
+  SET ?
+  WHERE user_id=${req.params.id};`;
 
-    db.query(qry, [req.body], (err) => {
+    db.query(qry, [data], (err) => {
       if (err) throw err;
 
       res.json({
