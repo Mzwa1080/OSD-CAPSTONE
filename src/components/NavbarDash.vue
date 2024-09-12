@@ -17,9 +17,9 @@
           <li class="nav-item">
             <router-link to="/" class="nav-link mt-2" aria-current="page">Home</router-link>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <router-link to="/about" class="nav-link mt-2">About</router-link>
-          </li>
+          </li> -->
           <li class="nav-item">
             <router-link to="/dashboard" class="nav-link mt-2">Services</router-link>
           </li>
