@@ -101,17 +101,14 @@
 
 </div>
 
-  <Footer/>
 </template>
 
 <script>
 import NavbarDash from "@/components/NavbarDash.vue";
 import { useCookies } from "vue3-cookies";
-import Footer from '../components/Footer.vue'
 export default {
   components: {
     NavbarDash,
-    Footer
   },
   data() {
     return {
